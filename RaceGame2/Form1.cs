@@ -8,61 +8,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RaceGame2.Cars;
 
 namespace RaceGame2
 {
     public partial class Form1 : Form
     {
-        Bitmap Backbuffer;              //truc om flikkeren te voorkomen bij tekenen
+        Bitmap Backbuffer;
 
-        float Angle { get; set; }       //rotatie van de auto
-        const int carAxisSpeed = 2;
+        List<Car> cars = new List<Car>();
 
-        Point carPos = new Point(30, 30); //wordt nog niet gebruikt! Maar misschien wel een idee!
-        Point carSpeed = new Point(carAxisSpeed, carAxisSpeed);
-
-
-        Image image = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car.jpg"));
-        //Opmerking: als je nieuwe plaatje wilt inladen zorg ervoor dat je de volgende Property aanpast in visual studio voor het desbtrefende plaatje:
-        //Copy To Output Directory: Copy always
-
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
 
-            this.SetStyle(
-            ControlStyles.UserPaint |
-            ControlStyles.AllPaintingInWmPaint |
-            ControlStyles.DoubleBuffer, true);
+            //aanmaken van de auto's
+            Image image1 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car_black_1.png"));
+            Size image1Size = new Size(image1.Width,image1.Height);
+            image1 = new Bitmap(image1,image1Size);
+            Image image2 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car.jpg"));
+            Car car1 = new Car(30, 30, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, image1);
+            Car car2 = new Car(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, image2);
 
-            Timer GameTimer = new Timer();
-            GameTimer.Interval = 10;
-            GameTimer.Tick += new EventHandler(GameTimer_Tick);
-            GameTimer.Start();
+            //toevoegen auto's aan de lijst cars
+            cars.Add(car1);
+            cars.Add(car2);
+
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.DoubleBuffer, true);
 
             this.ResizeEnd += new EventHandler(Form1_CreateBackBuffer);
             this.Load += new EventHandler(Form1_CreateBackBuffer);
             this.Paint += new PaintEventHandler(Form1_Paint);
 
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
 
-        void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Left)
-                carSpeed.X = -carAxisSpeed;
-            else if (e.KeyCode == Keys.Right)
-                carSpeed.X = carAxisSpeed;
-            else if (e.KeyCode == Keys.Up)
-                carSpeed.Y = -carAxisSpeed; // Y axis is downwards so -ve is up.
-            else if (e.KeyCode == Keys.Down)
-                carSpeed.Y = carAxisSpeed;
+        void Form1_KeyUp(object sender, KeyEventArgs e) {
+            foreach (Car car in cars)
+                car.handleKeyUpEvent(e);
         }
 
-        void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            if (Backbuffer != null)
-            {
+        void Form1_KeyDown(object sender, KeyEventArgs e) {
+            foreach (Car car in cars)
+                car.handleKeyDownEvent(e);
+        }
+
+        void Form1_Paint(object sender, PaintEventArgs e) {
+            if (Backbuffer != null) {
                 e.Graphics.DrawImageUnscaled(Backbuffer, Point.Empty);
             }
 
@@ -77,33 +72,27 @@ namespace RaceGame2
             Backbuffer = new Bitmap(ClientSize.Width, ClientSize.Height);
         }
 
-        
+        void Draw(Graphics g) {
+            foreach (Car car in cars)
+            {
 
-        void Draw(Graphics g)
-        {
-            //doe ook iets met de carSpeed! Dit moet je zelf bedenken, de carspeed wordt veranderd in Form1_KeyDown
+                //g.TranslateTransform((float)car.getImage().Width/2, (float)car.getImage().Height/2);
+                //g.RotateTransform(car.getAngle()+180);
+                //g.TranslateTransform(-(float)car.getImage().Width/2, -(float)car.getImage().Height/2);
+                var pos = car.getPosition();
 
+                g.TranslateTransform(pos.X, pos.Y);
+                g.RotateTransform(car.getAngle() - 90);
 
-            g.TranslateTransform(100 + image.Width / 2.0f, image.Height / 2.0f);
-            g.RotateTransform(Angle);
-            g.TranslateTransform(-image.Width / 2.0f, -image.Height / 2.0f);
-
-            g.DrawImage(image, 0, 0);
-
-
-            SolidBrush brush = new SolidBrush(System.Drawing.Color.Green);            
-            //recthoek die over auto staat
-            g.FillRectangle(brush, 10, 10, 100, 100);
+                g.DrawImage(car.getImage(), x: -(float)car.getImage().Height/2, y: -(float)car.getImage().Width/2);
+                g.ResetTransform();
+            }
         }
 
+        private void timerGameTicks_Tick(object sender, EventArgs e) {
+            foreach (Car car in cars)
+                car.calculateNewPosition();
 
-        void GameTimer_Tick(object sender, EventArgs e)
-        {
-            Angle += 1f;
-
-            //BallPos.X += BallSpeed.X;
-            //BallPos.Y += BallSpeed.Y;
-            
             Invalidate();
         }
     }
