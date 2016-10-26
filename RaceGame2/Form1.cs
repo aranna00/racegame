@@ -17,17 +17,28 @@ namespace RaceGame2
         Bitmap Backbuffer;
 
         List<Car> cars = new List<Car>();
+        private Map map;
+        private Map trees;
 
         public Form1() {
             InitializeComponent();
 
             //aanmaken van de auto's
             Image image1 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car_black_1.png"));
-            Size image1Size = new Size(image1.Width,image1.Height);
+            Size image1Size = new Size(23,40);
             image1 = new Bitmap(image1,image1Size);
             Image image2 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car.jpg"));
-            Car car1 = new Car(30, 30, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, image1);
+            Car car1 = new Car(300, 300, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, image1);
             Car car2 = new Car(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, image2);
+
+            //map
+            Image mapbg = new Bitmap(Path.Combine(Environment.CurrentDirectory, "background.png"));
+            Size mapbgSize = new Size(mapbg.Width,mapbg.Height);
+            mapbg = new Bitmap(mapbg,mapbgSize);
+            map  = new Map(0, 0, mapbg);
+
+            Image trees = new Bitmap(Path.Combine(Environment.CurrentDirectory, "trees.png"));
+            trees = new Bitmap(trees,mapbgSize);
 
             //toevoegen auto's aan de lijst cars
             cars.Add(car1);
@@ -73,6 +84,7 @@ namespace RaceGame2
         }
 
         void Draw(Graphics g) {
+            g.DrawImage(map.image,-800,-2600);
             foreach (Car car in cars)
             {
 
