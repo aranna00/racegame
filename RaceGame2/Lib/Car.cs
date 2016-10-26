@@ -7,7 +7,7 @@ namespace RaceGame2.Lib
 {
     public class Car
     {
-        public float maxSpeed = 10f;
+        public float maxSpeed = 5f;
         public int currentSpeed;
         public int acceleration;
         public int grip;
@@ -22,7 +22,7 @@ namespace RaceGame2.Lib
         private Point position;
         private Point prevPosition;
         private float rotation;
-        public static float rotationRate = (float) Math.PI / 50;
+        public static float rotationRate = (float) Math.PI / 20;
         private float angle;
         private double speed;
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;

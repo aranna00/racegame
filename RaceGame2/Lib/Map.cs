@@ -1,4 +1,4 @@
-﻿namespace RaceGame2.Lib
+namespace RaceGame2.Lib
 {
     public class Map
     {
