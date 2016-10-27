@@ -1,6 +1,6 @@
-﻿using RaceGame2.Cars;
+﻿using RaceGame2.Lib.Cars;
 
-namespace RaceGame2
+namespace RaceGame2.Lib
 {
     public class Player
     {

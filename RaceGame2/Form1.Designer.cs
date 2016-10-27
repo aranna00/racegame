@@ -31,19 +31,19 @@
             this.components = new System.ComponentModel.Container();
             this.timerGameTicks = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            //
+            // 
             // timerGameTicks
-            //
+            // 
             this.timerGameTicks.Enabled = true;
             this.timerGameTicks.Interval = 1;
             this.timerGameTicks.Tick += new System.EventHandler(this.timerGameTicks_Tick);
-            //
-            // formRaceGame
-            //
+            // 
+            // Form1
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 631);
-            this.Name = "formRaceGame";
+            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Name = "Form1";
             this.Text = "RaceGameExample";
             this.ResumeLayout(false);
 
