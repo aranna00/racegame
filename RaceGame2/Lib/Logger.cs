@@ -19,7 +19,7 @@ namespace RaceGame2.Lib
         {
             lines = "Debug: \r\n" + lines;
             Log(lines);
-        }
+       }
 
         private static void Log(String lines)
         {
