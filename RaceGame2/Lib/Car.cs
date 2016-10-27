@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
-namespace RaceGame2.Cars
+namespace RaceGame2.Lib
 {
     public class Car
     {
@@ -29,7 +30,6 @@ namespace RaceGame2.Cars
         private Image image;
 
 
-
         /// <summary>
         /// Constructor of the car class
         /// </summary>
@@ -41,9 +41,16 @@ namespace RaceGame2.Cars
         /// <param name="rightKey">the key to steer right</param>
         /// <param name="throttleKey">the key to throttle</param>
         /// <param name="brakeKey">the key to brake/reverse</param>
-        /// <param name="image">the image used to draw the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, Image image)
+        /// <param name="carColour">the colour of the players car</param>
+        /// <param name="imageLocation">the image name used to draw the car</param>
+        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
         {
+            imageLocation = (carColour+"\\"+imageLocation);
+            imageLocation = ("assets\\cars\\"+imageLocation);
+            imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            Image imageBitmap = new Bitmap(imageLocation);
+            Size imageSize = new Size(imageBitmap.Width/2,imageBitmap.Height/2);
+            imageBitmap = new Bitmap(imageBitmap,imageSize);
             position.X = postionx;
             position.Y = positiony;
             this.rotation = rotation;
@@ -52,7 +59,7 @@ namespace RaceGame2.Cars
             this.rightKey = rightKey;
             this.throttleKey = throttleKey;
             this.brakeKey = brakeKey;
-            this.image = image;
+            this.image = imageBitmap;
         }
 
         public void CalcFuel()
@@ -128,7 +135,7 @@ namespace RaceGame2.Cars
         {
             if (speed != 0)
             {
-                this.rotation += .07f;
+                this.rotation += (float)(.07f*speed/10);
             }
         }
 
@@ -136,7 +143,7 @@ namespace RaceGame2.Cars
         {
             if (speed != 0)
             {
-                this.rotation -= .07f;
+                this.rotation -= (float)(.07f*speed/10);
             }
         }
 
@@ -184,9 +191,9 @@ namespace RaceGame2.Cars
             return this.speed;
         }
 
-        public void setAngle(float angle)
+        public float getRotation()
         {
-            this.angle = angle;
+            return this.rotation;
         }
     }
 }
