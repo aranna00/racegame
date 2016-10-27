@@ -16,7 +16,8 @@ namespace RaceGame2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 startForm = new Form1();
+            Application.Run(startForm);
         }
     }
 }
