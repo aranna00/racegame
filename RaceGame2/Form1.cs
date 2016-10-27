@@ -8,41 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RaceGame2.Cars;
+using RaceGame2.Lib;
+using RaceGame2.Lib.Cars;
 
 namespace RaceGame2
 {
     public partial class Form1 : Form
     {
         Bitmap Backbuffer;
-
-        List<Car> cars = new List<Car>();
-        private Map map;
-        private Map trees;
+        private List<Car> cars = new List<Car>();
 
         public Form1() {
             InitializeComponent();
-
             //aanmaken van de auto's
-            Image image1 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car_black_1.png"));
-            Size image1Size = new Size(23,40);
-            image1 = new Bitmap(image1,image1Size);
-            Image image2 = new Bitmap(Path.Combine(Environment.CurrentDirectory, "car.jpg"));
-            Car car1 = new Car(300, 300, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, image1);
-            Car car2 = new Car(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, image2);
-
-            //map
-            Image mapbg = new Bitmap(Path.Combine(Environment.CurrentDirectory, "background.png"));
-            Size mapbgSize = new Size(mapbg.Width,mapbg.Height);
-            mapbg = new Bitmap(mapbg,mapbgSize);
-            map  = new Map(0, 0, mapbg);
-
-            Image trees = new Bitmap(Path.Combine(Environment.CurrentDirectory, "trees.png"));
-            trees = new Bitmap(trees,mapbgSize);
-
+            Car car1 = new Pickup(30, 30, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, "blue");
+            Car car2 = new Drifter(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, "green");
             //toevoegen auto's aan de lijst cars
+
             cars.Add(car1);
             cars.Add(car2);
+
 
             this.SetStyle(
                 ControlStyles.UserPaint |
@@ -84,17 +69,15 @@ namespace RaceGame2
         }
 
         void Draw(Graphics g) {
-            g.DrawImage(map.image,-800,-2600);
             foreach (Car car in cars)
             {
-
                 //g.TranslateTransform((float)car.getImage().Width/2, (float)car.getImage().Height/2);
                 //g.RotateTransform(car.getAngle()+180);
                 //g.TranslateTransform(-(float)car.getImage().Width/2, -(float)car.getImage().Height/2);
                 var pos = car.getPosition();
 
                 g.TranslateTransform(pos.X, pos.Y);
-                g.RotateTransform(car.getAngle() - 90);
+                g.RotateTransform(car.getRotation()*57.1f + 90);
 
                 g.DrawImage(car.getImage(), x: -(float)car.getImage().Height/2, y: -(float)car.getImage().Width/2);
                 g.ResetTransform();
@@ -103,8 +86,9 @@ namespace RaceGame2
 
         private void timerGameTicks_Tick(object sender, EventArgs e) {
             foreach (Car car in cars)
+            {
                 car.calculateNewPosition();
-
+            }
             Invalidate();
         }
     }
