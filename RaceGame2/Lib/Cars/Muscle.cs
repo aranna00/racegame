@@ -17,8 +17,10 @@ namespace RaceGame2.Lib.Cars
         /// <param name="brakeKey">the key to brake/reverse</param>
         /// <param name="carColour">the colour of the players car</param>
         /// <param name="imageLocation">the image name used to draw the car</param>
-        public Muscle(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, string carColour = "black", string imageLocation = "muscle.png") : base(postionx, positiony, rotation, speed, leftKey, rightKey, throttleKey, brakeKey, carColour, imageLocation)
+        public Muscle(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, string carColour = "black") : base(postionx, positiony, rotation, speed, leftKey, rightKey, throttleKey, brakeKey, carColour)
         {
+            this.imageLocation = "msucle.png";
+            SetImage(carColour);
         }
     }
 }

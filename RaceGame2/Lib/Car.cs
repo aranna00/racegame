@@ -7,7 +7,7 @@ namespace RaceGame2.Lib
 {
     public class Car
     {
-        public float maxSpeed = 10f;
+        public float maxSpeed = 5f;
         public int currentSpeed;
         public int acceleration;
         public int grip;
@@ -28,6 +28,7 @@ namespace RaceGame2.Lib
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
+        public String imageLocation;
 
 
         /// <summary>
@@ -41,16 +42,11 @@ namespace RaceGame2.Lib
         /// <param name="rightKey">the key to steer right</param>
         /// <param name="throttleKey">the key to throttle</param>
         /// <param name="brakeKey">the key to brake/reverse</param>
-        /// <param name="carColour">the colour of the players car</param>
-        /// <param name="imageLocation">the image name used to draw the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
+        /// <param name="carColour">the colour of the car</param>
+        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black")
         {
-            imageLocation = (carColour+"\\"+imageLocation);
-            imageLocation = ("assets\\cars\\"+imageLocation);
-            imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
-            Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/2,imageBitmap.Height/2);
-            imageBitmap = new Bitmap(imageBitmap,imageSize);
+            this.imageLocation = "default.png";
+            SetImage(carColour);
             position.X = postionx;
             position.Y = positiony;
             this.rotation = rotation;
@@ -59,12 +55,23 @@ namespace RaceGame2.Lib
             this.rightKey = rightKey;
             this.throttleKey = throttleKey;
             this.brakeKey = brakeKey;
+        }
+
+        public void SetImage(String carColour)
+        {
+            this.imageLocation = (carColour+"\\"+this.imageLocation);
+            Logger.Info(this.imageLocation);
+            this.imageLocation = ("assets\\cars\\"+this.imageLocation);
+            this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            Image imageBitmap = new Bitmap(imageLocation);
+            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
+            imageBitmap = new Bitmap(imageBitmap,imageSize);
             this.image = imageBitmap;
         }
 
         public void CalcFuel()
         {
-            fuel = fuel - fuelCost;
+            fuel =- fuelCost;
         }
 
         public void handleKeyDownEvent(KeyEventArgs keys)
@@ -123,9 +130,9 @@ namespace RaceGame2.Lib
 
         private void coast()
         {
-            if (speed >= .02)
+            if (speed > .02)
                 speed -= .05;
-            else if (speed <= -.02)
+            else if (speed < -.02)
                 speed += 0.05;
             else
                 speed = 0;
@@ -171,7 +178,27 @@ namespace RaceGame2.Lib
             prevPosition = position;
             position.X += (int)Math.Round(speed * Math.Cos(rotation)); //pure magic here!
             position.Y += (int)Math.Round(speed * Math.Sin(rotation)); //more magic here
-            float angle =
+            if (position.X > 990)
+            {
+                position.X = 990;
+                speed = 0;
+            }
+            else if (position.X < 13)
+            {
+                position.X = 13;
+                speed = 0;
+            }
+            if (position.Y > 710)
+            {
+                position.Y = 710;
+                speed = 0;
+            }
+            else if (position.Y < 13)
+            {
+                position.Y = 13;
+                speed = 0;
+            }
+            this.angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
                      this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
