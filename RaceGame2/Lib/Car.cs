@@ -7,7 +7,7 @@ namespace RaceGame2.Lib
 {
     public class Car
     {
-        public float maxSpeed = 10f;
+        public float maxSpeed = 4f;
         public int currentSpeed;
         public int acceleration;
         public int grip;
@@ -28,7 +28,9 @@ namespace RaceGame2.Lib
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
-        public int checkpointCounter = 0;
+        public int checkpointCounter = 1;
+        public int lapCounter=0;
+        
 
 
         /// <summary>
@@ -196,5 +198,8 @@ namespace RaceGame2.Lib
         {
             return this.rotation;
         }
+
+        
     }
 }
+                    
