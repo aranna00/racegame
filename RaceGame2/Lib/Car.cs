@@ -11,14 +11,14 @@ namespace RaceGame2.Lib
     {
         public float maxSpeed = 4f;
         public int currentSpeed;
-        public int acceleration;
+        public float acceleration = 0.03f;
         public int grip;
         public int health;
         public int maxHealth;
         public int weight;
-        public int fuelCost = 1;
+        public float fuel = 100;
+        public float fuelCost = 0.1f;
         public int maxFuel = 100;
-        public int fuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
         private Point position;
@@ -30,6 +30,8 @@ namespace RaceGame2.Lib
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
+        public int checkpointCounter = 1;
+        public int lapCounter = 0;
 
 
         /// <summary>
@@ -111,29 +113,41 @@ namespace RaceGame2.Lib
 
         private void accelerate()
         {
-            if (fuel > 0)
+            if (fuel > 0 && speed >= 0)
             {
-                speed = speed + .02;
-                if
-                    (speed >= maxSpeed)
-                    speed = maxSpeed;
+                speed += acceleration;
                 CalcFuel();
+                if (speed >= maxSpeed)
+                {
+                   speed = maxSpeed;
+
+                }
+
+            }
+            if (fuel > 0 && speed < 0)
+            {
+                speed += .1;
             }
             else
             {
                 coast();
             }
-
         }
 
         private void brake()
         {
-            if (fuel > 0)
+            if (fuel > 0 && speed <= 0)
             {
-                speed = speed - .1;
-                if (speed <= -2.0)
-                    speed = -2.0;
+                speed -= 0.1;
                 CalcFuel();
+                if (speed >= 2.0)
+                {
+                    speed = 2.0;
+                }
+            }
+            if (fuel > 0 && speed > 0)
+            {
+                speed -= .1;
             }
             else
             {
@@ -143,10 +157,10 @@ namespace RaceGame2.Lib
 
         private void coast()
         {
-            if (speed >= .02)
-                speed -= .05;
-            else if (speed <= -.02)
-                speed += 0.05;
+            if (speed >= .008)
+                speed -= .02;
+            else if (speed <= -.008)
+                speed += 0.02;
             else
                 speed = 0;
         }
@@ -155,7 +169,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation += (float) (.07f * speed / 10);
+                this.rotation += (float) (.15f * speed / 10);
             }
         }
 
@@ -163,7 +177,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float) (.07f * speed / 10);
+                this.rotation -= (float) (.15f * speed / 10);
             }
         }
 
