@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RaceGame2.Lib
 {
@@ -175,7 +177,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float) (.15f * speed / 10);
+                this.rotation -= (float) (.15f * speed / 10)
             }
         }
 
@@ -226,6 +228,21 @@ namespace RaceGame2.Lib
         public float getRotation()
         {
             return this.rotation;
+        }
+
+        private void PitStop()
+        {
+            if (speed == 0)
+            {
+                if (fuel < maxFuel)
+                {
+                    fuel += 10;
+                }
+                if (health < maxHealth)
+                {
+                    health += 1;
+                }
+            }
         }
     }
 }
