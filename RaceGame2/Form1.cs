@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RaceGame2.Lib;
 using RaceGame2.Lib.Cars;
+using RaceGame2.Lib.Maps;
 
 namespace RaceGame2
 {
@@ -17,18 +18,20 @@ namespace RaceGame2
     {
         Bitmap Backbuffer;
         private List<Car> cars = new List<Car>();
-
+        private Map map;
+        
         public Form1() {
             InitializeComponent();
             //aanmaken van de auto's
-            Car car1 = new Pickup(30, 30, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, "blue");
-            Car car2 = new Drifter(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, "green");
+            Car car1 = new Pickup(470, 352, (float) (1*Math.PI), 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, "blue");
+            Car car2 = new Drifter(470, 307, (float) (1*Math.PI), 0, Keys.A, Keys.D, Keys.W, Keys.S, "green");
             //toevoegen auto's aan de lijst cars
 
             cars.Add(car1);
             cars.Add(car2);
-
-
+            map = new DirtMap1(cars);
+            
+            
             this.SetStyle(
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
@@ -69,6 +72,7 @@ namespace RaceGame2
         }
 
         void Draw(Graphics g) {
+            g.DrawImage(map.image, 0, 0);
             foreach (Car car in cars)
             {
                 //g.TranslateTransform((float)car.getImage().Width/2, (float)car.getImage().Height/2);
@@ -85,6 +89,10 @@ namespace RaceGame2
         }
 
         private void timerGameTicks_Tick(object sender, EventArgs e) {
+            label1.Text = cars[0].checkpointCounter.ToString();
+            label2.Text = cars[0].getPosition().X.ToString();
+            label3.Text = cars[0].getPosition().Y.ToString();
+            map.checkpointChecker();
             foreach (Car car in cars)
             {
                 car.calculateNewPosition();
