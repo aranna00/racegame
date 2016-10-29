@@ -18,8 +18,15 @@ namespace RaceGame2
         private PictureBox selectedCar1;
         private PictureBox selectedCar2;
         private int counter;
+        public List<Car> cars;
         public Form1()
         {
+            InitializeComponent();
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.DoubleBuffer, true);
+
             InitializeComponent();
             selectedCar1 = Default1;
             selectedCar2 = Default2;
@@ -33,7 +40,25 @@ namespace RaceGame2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Text = "Vette game";
+            if (cars.Count != 0)
+            {
+                cars.RemoveRange(0,1);
+            }
+            //aanmaken van de auto's
+//            Car car1 = new Pickup(30, 30, 0, 0, Keys.Left, Keys.Right, Keys.Up, Keys.Down, "blue");
+            
+            Car car2 = new Drifter(90, 20, 0, 0, Keys.A, Keys.D, Keys.W, Keys.S, "green");
+            //toevoegen auto's aan de lijst cars
+
+            cars.Add(car1);
+            cars.Add(car2);
+            selectedMap = new Map();
+            gameForm?.Close();
+            this.gameForm = new RaceGame(this.cars, selectedMap);
+            gameForm.FormClosed += new FormClosedEventHandler(gameFormCloseHandler);
+            gameForm.Show();
+            this.Hide();
+
         }
 
 
@@ -326,6 +351,11 @@ namespace RaceGame2
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void gameFormCloseHandler(object sender, FormClosedEventArgs e )
+        {
+            this.Show();
         }
     }
 }
