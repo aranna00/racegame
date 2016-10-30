@@ -11,7 +11,7 @@ namespace RaceGame2.Lib
     {
         public float maxSpeed = 4f;
         public int currentSpeed;
-        public float acceleration = 0.03f;
+        public float acceleration = 0.01f;
         public int grip;
         public int health;
         public int maxHealth;
@@ -22,6 +22,7 @@ namespace RaceGame2.Lib
         public int turningSpeed;
         private bool isAccelerating;
         private Point position;
+        private float positionX, positionY;
         private Point prevPosition;
         private float rotation;
         public static float rotationRate = (float) Math.PI / 50;
@@ -32,6 +33,8 @@ namespace RaceGame2.Lib
         private Image image;
         public int checkpointCounter = 1;
         public int lapCounter = 0;
+        public float handeling = 0.015f;
+        private float driftAngle;
 
 
         /// <summary>
@@ -124,11 +127,15 @@ namespace RaceGame2.Lib
                 }
 
             }
-            if (fuel > 0 && speed < 0)
+            else if (fuel > 0 && speed < 0)
             {
                 speed += .1;
             }
-            else
+            else if (fuel <= 0 && speed < 0)
+            {
+                speed += .1;
+            }
+            else if (fuel <= 0 && speed > 0)
             {
                 coast();
             }
@@ -138,18 +145,22 @@ namespace RaceGame2.Lib
         {
             if (fuel > 0 && speed <= 0)
             {
-                speed -= 0.1;
+                speed -= acceleration;
                 CalcFuel();
-                if (speed >= 2.0)
+                if (speed <= -2.0)
                 {
-                    speed = 2.0;
+                    speed = -2.0;
                 }
             }
             if (fuel > 0 && speed > 0)
             {
                 speed -= .1;
             }
-            else
+            else if (fuel <= 0 && speed > 0)
+            {
+                speed -= .1;
+            }
+            else if (fuel <= 0 && speed < 0)
             {
                 coast();
             }
@@ -157,10 +168,10 @@ namespace RaceGame2.Lib
 
         private void coast()
         {
-            if (speed >= .008)
-                speed -= .02;
-            else if (speed <= -.008)
-                speed += 0.02;
+            if (speed >= 0.1f)
+                speed -= .004f;
+            else if (speed <= -.1f)
+                speed += 0.01f;
             else
                 speed = 0;
         }
@@ -169,7 +180,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation += (float) (.15f * speed / 10);
+                this.rotation += (float) (handeling * speed);
             }
         }
 
@@ -177,7 +188,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float) (.15f * speed / 10);
+                this.rotation -= (float) (handeling * speed);
             }
         }
 
@@ -201,18 +212,20 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
-            changeSpeed();
             prevPosition = position;
-            position.X += (int) Math.Round(speed * Math.Cos(rotation)); //pure magic here!
-            position.Y += (int) Math.Round(speed * Math.Sin(rotation)); //more magic here
+            positionX += (float) (speed * Math.Cos(rotation)); //pure magic here!
+            positionY += (float) (speed * Math.Sin(rotation)); //more magic here
+            position.X = (int) Math.Round(positionX);
+            position.Y = (int) Math.Round(positionY);
             float angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
-                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
+                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI) - driftAngle);
             if (Math.Abs(angle) > 2)
             {
                 this.angle = angle;
             }
+            changeSpeed();
         }
 
         public float getAngle()
@@ -236,7 +249,7 @@ namespace RaceGame2.Lib
             {
                 if (fuel < maxFuel)
                 {
-                    fuel += 10;
+                    fuel += 1;
                 }
                 if (health < maxHealth)
                 {
