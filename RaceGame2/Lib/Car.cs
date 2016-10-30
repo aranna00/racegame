@@ -7,7 +7,7 @@ namespace RaceGame2.Lib
 {
     public class Car
     {
-        public float maxSpeed = 10f;
+        public float maxSpeed = 4f;
         public int currentSpeed;
         public int acceleration;
         public int grip;
@@ -28,6 +28,9 @@ namespace RaceGame2.Lib
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
+        public int checkpointCounter = 1;
+        public int lapCounter=0;
+        
 
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace RaceGame2.Lib
             imageLocation = ("assets\\cars\\"+imageLocation);
             imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/2,imageBitmap.Height/2);
+            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
             imageBitmap = new Bitmap(imageBitmap,imageSize);
             position.X = postionx;
             position.Y = positiony;
@@ -195,5 +198,8 @@ namespace RaceGame2.Lib
         {
             return this.rotation;
         }
+
+        
     }
 }
+                    

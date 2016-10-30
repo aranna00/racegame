@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RaceGame2.Lib;
 using RaceGame2.Lib.Cars;
+using RaceGame2.Lib.Maps;
 
 namespace RaceGame2
 {
