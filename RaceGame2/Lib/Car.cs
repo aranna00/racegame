@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RaceGame2.Lib
 {
@@ -9,13 +11,13 @@ namespace RaceGame2.Lib
     {
         public float maxSpeed = 4f;
         public int currentSpeed;
-        public int acceleration;
+        public float acceleration = 0.03f;
         public int grip;
         public int health;
         public int maxHealth;
         public int weight;
-        public int fuel;
-        public int fuelCost;
+        public float fuel = 100;
+        public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
@@ -29,8 +31,7 @@ namespace RaceGame2.Lib
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
         public int checkpointCounter = 1;
-        public int lapCounter=0;
-        
+        public int lapCounter = 0;
 
 
         /// <summary>
@@ -46,14 +47,15 @@ namespace RaceGame2.Lib
         /// <param name="brakeKey">the key to brake/reverse</param>
         /// <param name="carColour">the colour of the players car</param>
         /// <param name="imageLocation">the image name used to draw the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
+        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey,
+            Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
         {
-            imageLocation = (carColour+"\\"+imageLocation);
-            imageLocation = ("assets\\cars\\"+imageLocation);
+            imageLocation = (carColour + "\\" + imageLocation);
+            imageLocation = ("assets\\cars\\" + imageLocation);
             imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
-            imageBitmap = new Bitmap(imageBitmap,imageSize);
+            Size imageSize = new Size(imageBitmap.Width / 4, imageBitmap.Height / 4);
+            imageBitmap = new Bitmap(imageBitmap, imageSize);
             position.X = postionx;
             position.Y = positiony;
             this.rotation = rotation;
@@ -67,7 +69,7 @@ namespace RaceGame2.Lib
 
         public void CalcFuel()
         {
-            fuel = fuel - fuelCost;
+            fuel -= fuelCost;
         }
 
         public void handleKeyDownEvent(KeyEventArgs keys)
@@ -98,6 +100,7 @@ namespace RaceGame2.Lib
         {
             return position;
         }
+
         public Point getPrevPosition()
         {
             return prevPosition;
@@ -110,26 +113,54 @@ namespace RaceGame2.Lib
 
         private void accelerate()
         {
-            speed = speed + .1;
+            if (fuel > 0 && speed >= 0)
+            {
+                speed += acceleration;
+                CalcFuel();
+                if (speed >= maxSpeed)
+                {
+                   speed = maxSpeed;
 
-            if (speed >= maxSpeed)
-                speed = maxSpeed;
+                }
+
+            }
+            if (fuel > 0 && speed < 0)
+            {
+                speed += .1;
+            }
+            else
+            {
+                coast();
+            }
         }
 
         private void brake()
         {
-            speed = speed - .1;
-
-            if (speed <= -2.0)
-                speed = -2.0;
+            if (fuel > 0 && speed <= 0)
+            {
+                speed -= 0.1;
+                CalcFuel();
+                if (speed >= 2.0)
+                {
+                    speed = 2.0;
+                }
+            }
+            if (fuel > 0 && speed > 0)
+            {
+                speed -= .1;
+            }
+            else
+            {
+                coast();
+            }
         }
 
         private void coast()
         {
-            if (speed >= .02)
-                speed -= .05;
-            else if (speed <= -.02)
-                speed += 0.05;
+            if (speed >= .008)
+                speed -= .02;
+            else if (speed <= -.008)
+                speed += 0.02;
             else
                 speed = 0;
         }
@@ -138,7 +169,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation += (float)(.07f*speed/10);
+                this.rotation += (float) (.15f * speed / 10);
             }
         }
 
@@ -146,7 +177,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float)(.07f*speed/10);
+                this.rotation -= (float) (.15f * speed / 10)
             }
         }
 
@@ -172,8 +203,8 @@ namespace RaceGame2.Lib
         {
             changeSpeed();
             prevPosition = position;
-            position.X += (int)Math.Round(speed * Math.Cos(rotation)); //pure magic here!
-            position.Y += (int)Math.Round(speed * Math.Sin(rotation)); //more magic here
+            position.X += (int) Math.Round(speed * Math.Cos(rotation)); //pure magic here!
+            position.Y += (int) Math.Round(speed * Math.Sin(rotation)); //more magic here
             float angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
@@ -199,7 +230,19 @@ namespace RaceGame2.Lib
             return this.rotation;
         }
 
-        
+        private void PitStop()
+        {
+            if (speed == 0)
+            {
+                if (fuel < maxFuel)
+                {
+                    fuel += 10;
+                }
+                if (health < maxHealth)
+                {
+                    health += 1;
+                }
+            }
+        }
     }
 }
-                    
