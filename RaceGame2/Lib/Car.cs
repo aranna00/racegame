@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace RaceGame2.Lib
 {
@@ -21,7 +19,7 @@ namespace RaceGame2.Lib
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
-        private Point position;
+        private Point position = new Point(0,0);
         private Point prevPosition;
         private float rotation;
         public static float rotationRate = (float) Math.PI / 50;
@@ -32,44 +30,48 @@ namespace RaceGame2.Lib
         private Image image;
         public int checkpointCounter = 1;
         public int lapCounter = 0;
+        public String imageLocation;
 
 
         /// <summary>
         /// Constructor of the car class
         /// </summary>
-        /// <param name="postionx">starting position of the car (Horiz)</param>
-        /// <param name="positiony">starting position of the car (Vert)</param>
-        /// <param name="rotation">starting rotation of the car (0 for car is pointing left)</param>
-        /// <param name="speed">starting speed of the car</param>
+        public Car()
+        {
+            this.imageLocation = "default.png";
+            position.X = 0;
+            position.Y = 0;
+            this.rotation = 0;
+            this.speed = 0;
+        }
+
         /// <param name="leftKey">the key to steer left</param>
         /// <param name="rightKey">the key to steer right</param>
         /// <param name="throttleKey">the key to throttle</param>
         /// <param name="brakeKey">the key to brake/reverse</param>
-        /// <param name="carColour">the colour of the players car</param>
-        /// <param name="imageLocation">the image name used to draw the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey,
-            Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
+        public void setControls(Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey)
         {
-            imageLocation = (carColour + "\\" + imageLocation);
-            imageLocation = ("assets\\cars\\" + imageLocation);
-            imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
-            Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width / 4, imageBitmap.Height / 4);
-            imageBitmap = new Bitmap(imageBitmap, imageSize);
-            position.X = postionx;
-            position.Y = positiony;
-            this.rotation = rotation;
-            this.speed = speed;
             this.leftKey = leftKey;
             this.rightKey = rightKey;
             this.throttleKey = throttleKey;
             this.brakeKey = brakeKey;
+        }
+
+        public void SetImage(String carColour)
+        {
+            this.imageLocation = (carColour+"\\"+this.imageLocation);
+            Logger.Info(this.imageLocation);
+            this.imageLocation = ("assets\\cars\\"+this.imageLocation);
+            this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            Image imageBitmap = new Bitmap(imageLocation);
+            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
+            imageBitmap = new Bitmap(imageBitmap,imageSize);
             this.image = imageBitmap;
         }
 
         public void CalcFuel()
         {
-            fuel -= fuelCost;
+            fuel =- fuelCost;
         }
 
         public void handleKeyDownEvent(KeyEventArgs keys)
@@ -203,9 +205,29 @@ namespace RaceGame2.Lib
         {
             changeSpeed();
             prevPosition = position;
-            position.X += (int) Math.Round(speed * Math.Cos(rotation)); //pure magic here!
-            position.Y += (int) Math.Round(speed * Math.Sin(rotation)); //more magic here
-            float angle =
+            position.X += (int)Math.Round(speed * Math.Cos(rotation)); //pure magic here!
+            position.Y += (int)Math.Round(speed * Math.Sin(rotation)); //more magic here
+            if (position.X > 990)
+            {
+                position.X = 990;
+                speed = 0;
+            }
+            else if (position.X < 13)
+            {
+                position.X = 13;
+                speed = 0;
+            }
+            if (position.Y > 710)
+            {
+                position.Y = 710;
+                speed = 0;
+            }
+            else if (position.Y < 13)
+            {
+                position.Y = 13;
+                speed = 0;
+            }
+            this.angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
                      this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
