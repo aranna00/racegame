@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
+using System.IO.Ports;
+using System.Net.Mime;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -16,7 +19,7 @@ namespace RaceGame2.Lib
         public int health;
         public int maxHealth;
         public int weight;
-        public float fuel = 100;
+        public float fuel = 100000;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
@@ -34,7 +37,8 @@ namespace RaceGame2.Lib
         public int checkpointCounter = 1;
         public int lapCounter = 0;
         public float handeling = 0.015f;
-        private float driftAngle;
+        private int counter;
+        //private Image mapImage = new Map().image;
 
 
         /// <summary>
@@ -122,10 +126,8 @@ namespace RaceGame2.Lib
                 CalcFuel();
                 if (speed >= maxSpeed)
                 {
-                   speed = maxSpeed;
-
+                    speed = maxSpeed;
                 }
-
             }
             else if (fuel > 0 && speed < 0)
             {
@@ -212,6 +214,10 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
+            if (!Map.onTrack(position.X, position.Y))
+            {
+                speed = speed * 0.95;
+            }
             prevPosition = position;
             positionX += (float) (speed * Math.Cos(rotation)); //pure magic here!
             positionY += (float) (speed * Math.Sin(rotation)); //more magic here
@@ -220,7 +226,7 @@ namespace RaceGame2.Lib
             float angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
-                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI) - driftAngle);
+                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
             if (Math.Abs(angle) > 2)
             {
                 this.angle = angle;

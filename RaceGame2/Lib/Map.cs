@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Mime;
@@ -18,10 +20,11 @@ namespace RaceGame2.Lib
         public List<Point> respawn = new List<Point>();
         public string imageLocation;
         public Image image;
+        private static Bitmap mapImage;
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
 
-    public Map(List<Car> cars)
+    public Map()
         {
             //setImage();
         }
@@ -34,6 +37,7 @@ namespace RaceGame2.Lib
             Size imageSize = new Size(1024, 768);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;
+            mapImage = (Bitmap)image;
         }
 
         //        public void checkpointChecker()
@@ -54,6 +58,35 @@ namespace RaceGame2.Lib
         //                }
         //            }
         //        }
+
+        public Image getImage()
+        {
+            return this.image;
+        }
+
+        public static Boolean onTrack(int x, int y)
+        {
+            if (mapImage == null)
+            {
+                Debug.WriteLine("4");
+                return false;
+            }
+            if (x > 0 && y > 0 && x < mapImage.Width && y < mapImage.Height)
+            {
+                Color color = mapImage.GetPixel(x, y);
+                if (color.R > 150)
+                {
+                    Debug.WriteLine("1");
+                    return true;
+                }
+                Debug.WriteLine("2");
+                return false;
+
+            }
+            Debug.WriteLine("3 " + mapImage.Width + "," + mapImage.Height);
+            return false;
+        }
+
         public void checkpointChecker()
         {
             int counter = 0;

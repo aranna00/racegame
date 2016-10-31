@@ -93,6 +93,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\maps\road1.png" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\maps\" />
+    <Folder Include="Lib\maps" />
     <Folder Include="Lib\Upgrades\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
