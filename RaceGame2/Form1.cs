@@ -29,7 +29,9 @@ namespace RaceGame2
 
             cars.Add(car1);
             cars.Add(car2);
-            map = new DirtMap1(cars);
+          map = new DirtMap1(cars);
+         // map = new roadmap1(cars);
+          map.Position();
             
             
             this.SetStyle(
@@ -44,6 +46,7 @@ namespace RaceGame2
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
+       
 
         void Form1_KeyUp(object sender, KeyEventArgs e) {
             foreach (Car car in cars)
@@ -73,6 +76,7 @@ namespace RaceGame2
 
         void Draw(Graphics g) {
             g.DrawImage(map.image, 0, 0);
+
             foreach (Car car in cars)
             {
                 //g.TranslateTransform((float)car.getImage().Width/2, (float)car.getImage().Height/2);
@@ -92,6 +96,7 @@ namespace RaceGame2
             label1.Text = cars[0].checkpointCounter.ToString();
             label2.Text = cars[0].getPosition().X.ToString();
             label3.Text = cars[0].getPosition().Y.ToString();
+            label4.Text = cars[0].lapCounter.ToString();
             map.checkpointChecker();
             foreach (Car car in cars)
             {
@@ -99,5 +104,7 @@ namespace RaceGame2
             }
             Invalidate();
         }
+
+        
     }
 }

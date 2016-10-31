@@ -19,18 +19,19 @@ namespace RaceGame2.Lib
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
-        private Point position;
-        private Point prevPosition;
-        private float rotation;
-        public static float rotationRate = (float) Math.PI / 50;
+        public Point position;
+        public Point prevPosition;
+        public float rotation;
+        public static float rotationRate = (float) Math.PI/50;
         private float angle;
         private double speed;
         private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey;
         private Image image;
         public int checkpointCounter = 1;
-        public int lapCounter=0;
-        
+        public int lapCounter = 0;
+
+
 
 
         /// <summary>
@@ -46,14 +47,15 @@ namespace RaceGame2.Lib
         /// <param name="brakeKey">the key to brake/reverse</param>
         /// <param name="carColour">the colour of the players car</param>
         /// <param name="imageLocation">the image name used to draw the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
+        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey,
+            Keys throttleKey, Keys brakeKey, String carColour = "black", String imageLocation = "default.png")
         {
-            imageLocation = (carColour+"\\"+imageLocation);
-            imageLocation = ("assets\\cars\\"+imageLocation);
+            imageLocation = (carColour + "\\" + imageLocation);
+            imageLocation = ("assets\\cars\\" + imageLocation);
             imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
-            imageBitmap = new Bitmap(imageBitmap,imageSize);
+            Size imageSize = new Size(imageBitmap.Width/5, imageBitmap.Height/5);
+            imageBitmap = new Bitmap(imageBitmap, imageSize);
             position.X = postionx;
             position.Y = positiony;
             this.rotation = rotation;
@@ -98,6 +100,7 @@ namespace RaceGame2.Lib
         {
             return position;
         }
+
         public Point getPrevPosition()
         {
             return prevPosition;
@@ -138,7 +141,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation += (float)(.07f*speed/10);
+                this.rotation += (float) (.07f*speed/10);
             }
         }
 
@@ -146,7 +149,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float)(.07f*speed/10);
+                this.rotation -= (float) (.07f*speed/10);
             }
         }
 
@@ -172,12 +175,12 @@ namespace RaceGame2.Lib
         {
             changeSpeed();
             prevPosition = position;
-            position.X += (int)Math.Round(speed * Math.Cos(rotation)); //pure magic here!
-            position.Y += (int)Math.Round(speed * Math.Sin(rotation)); //more magic here
+            position.X += (int) Math.Round(speed*Math.Cos(rotation)); //pure magic here!
+            position.Y += (int) Math.Round(speed*Math.Sin(rotation)); //more magic here
             float angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
-                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
+                     this.getPrevPosition().X - this.getPosition().X)*(180/Math.PI));
             if (Math.Abs(angle) > 2)
             {
                 this.angle = angle;
@@ -198,8 +201,7 @@ namespace RaceGame2.Lib
         {
             return this.rotation;
         }
-
-        
     }
+
 }
                     
