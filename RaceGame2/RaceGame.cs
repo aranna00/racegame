@@ -61,6 +61,7 @@ namespace RaceGame2
         }
 
         void Draw(Graphics g) {
+
             foreach (Car car in cars)
             {
                 var pos = car.getPosition();
@@ -83,6 +84,7 @@ namespace RaceGame2
         private void init()
         {
             Size size = new Size(1024, 768);
+            this.Location = new Point(0,0);
             this.Size = size ;
             this.MaximumSize = size;
             this.Name = "RaceGame";

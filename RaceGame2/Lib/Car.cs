@@ -19,7 +19,7 @@ namespace RaceGame2.Lib
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
-        private Point position;
+        private Point position = new Point(0,0);
         private Point prevPosition;
         private float rotation;
         public static float rotationRate = (float) Math.PI / 50;
@@ -34,23 +34,21 @@ namespace RaceGame2.Lib
         /// <summary>
         /// Constructor of the car class
         /// </summary>
-        /// <param name="postionx">starting position of the car (Horiz)</param>
-        /// <param name="positiony">starting position of the car (Vert)</param>
-        /// <param name="rotation">starting rotation of the car (0 for car is pointing left)</param>
-        /// <param name="speed">starting speed of the car</param>
+        public Car()
+        {
+            this.imageLocation = "default.png";
+            position.X = 0;
+            position.Y = 0;
+            this.rotation = 0;
+            this.speed = 0;
+        }
+
         /// <param name="leftKey">the key to steer left</param>
         /// <param name="rightKey">the key to steer right</param>
         /// <param name="throttleKey">the key to throttle</param>
         /// <param name="brakeKey">the key to brake/reverse</param>
-        /// <param name="carColour">the colour of the car</param>
-        public Car(int postionx, int positiony, float rotation, double speed, Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, String carColour = "black")
+        public void setControls(Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey)
         {
-            this.imageLocation = "default.png";
-            SetImage(carColour);
-            position.X = postionx;
-            position.Y = positiony;
-            this.rotation = rotation;
-            this.speed = speed;
             this.leftKey = leftKey;
             this.rightKey = rightKey;
             this.throttleKey = throttleKey;
