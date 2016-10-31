@@ -19,9 +19,9 @@ namespace RaceGame2.Lib
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
-        private Point position = new Point(0,0);
+        public Point position = new Point(0,0);
         private Point prevPosition;
-        private float rotation;
+        public float rotation;
         public static float rotationRate = (float) Math.PI / 50;
         private float angle;
         private double speed;
@@ -39,6 +39,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public Car()
         {
+            this.fuel = 100;
             this.imageLocation = "default.png";
             position.X = 0;
             position.Y = 0;
@@ -61,7 +62,6 @@ namespace RaceGame2.Lib
         public void SetImage(String carColour)
         {
             this.imageLocation = (carColour+"\\"+this.imageLocation);
-            Logger.Info(this.imageLocation);
             this.imageLocation = ("assets\\cars\\"+this.imageLocation);
             this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
@@ -72,7 +72,7 @@ namespace RaceGame2.Lib
 
         public void CalcFuel()
         {
-            fuel =- fuelCost;
+            fuel -= fuelCost;
         }
 
         public void handleKeyDownEvent(KeyEventArgs keys)
@@ -89,6 +89,7 @@ namespace RaceGame2.Lib
 
         public void handleKeyUpEvent(KeyEventArgs keys)
         {
+            ;
             if (leftKey == keys.KeyCode)
                 leftPressed = false;
             if (rightKey == keys.KeyCode)
@@ -180,7 +181,7 @@ namespace RaceGame2.Lib
         {
             if (speed != 0)
             {
-                this.rotation -= (float) (.15f * speed / 10)
+                this.rotation -= (float) (.15f * speed / 10);
             }
         }
 

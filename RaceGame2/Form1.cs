@@ -55,7 +55,7 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
-            selectedMap = new Map();
+            selectedMap = new Map(cars);
             raceForm = new RaceGame(cars,selectedMap);
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
             raceForm.Show();
@@ -72,8 +72,6 @@ namespace RaceGame2
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
-            this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
 
 

@@ -9,7 +9,7 @@ namespace RaceGame2.Lib.Cars
         /// </summary>
         public Muscle()
         {
-            this.imageLocation = "msucle.png";
+            this.imageLocation = "muscle.png";
         }
     }
 }
