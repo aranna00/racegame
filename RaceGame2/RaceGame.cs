@@ -14,7 +14,6 @@ namespace RaceGame2
 
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
-
         public RaceGame(List<Car> cars,Map map)
         {
             this.init();
@@ -72,7 +71,7 @@ namespace RaceGame2
             }
         }
 
-        private void timerGameTicks_Tick(object sender, EventArgs e) {
+        public void timerGameTicks_Tick(object sender, EventArgs e) {
             foreach (Car car in cars)
             {
                 car.calculateNewPosition();
@@ -100,6 +99,6 @@ namespace RaceGame2
         }
 
         #endregion
-        private System.Windows.Forms.Timer timerGameTicks;
+        public System.Windows.Forms.Timer timerGameTicks;
     }
 }
