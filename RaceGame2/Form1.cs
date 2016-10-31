@@ -72,7 +72,10 @@ namespace RaceGame2
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
+
 
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -142,7 +145,6 @@ namespace RaceGame2
 
 
             }
-
         }
 
         private void label4_Click(object sender, EventArgs e)

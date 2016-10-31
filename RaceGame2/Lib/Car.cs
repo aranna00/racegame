@@ -33,6 +33,7 @@ namespace RaceGame2.Lib
         public String imageLocation;
 
 
+
         /// <summary>
         /// Constructor of the car class
         /// </summary>
@@ -228,9 +229,12 @@ namespace RaceGame2.Lib
                 speed = 0;
             }
             this.angle =
+            position.X += (int) Math.Round(speed*Math.Cos(rotation)); //pure magic here!
+            position.Y += (int) Math.Round(speed*Math.Sin(rotation)); //more magic here
+            float angle =
                 (float)
                 (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
-                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
+                     this.getPrevPosition().X - this.getPosition().X)*(180/Math.PI));
             if (Math.Abs(angle) > 2)
             {
                 this.angle = angle;
@@ -267,4 +271,6 @@ namespace RaceGame2.Lib
             }
         }
     }
+
 }
+                    
