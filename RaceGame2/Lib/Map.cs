@@ -61,6 +61,7 @@ namespace RaceGame2.Lib
                 upgradeCounter = 0;
             }
             upgradeCounter++;
+        }
 
         //        public void checkpointChecker()
         //        {

@@ -376,7 +376,7 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "RoadMap1",
-            "DirtMap1"});
+            "DirtMap"});
             this.comboBox2.Location = new System.Drawing.Point(464, 368);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(75, 21);

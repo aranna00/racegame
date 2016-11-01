@@ -62,8 +62,6 @@
     <Compile Include="Lib\Logger.cs" />
     <Compile Include="Lib\Map.cs" />
     <Compile Include="Lib\Maps\Dirtmap.cs" />
-    <Compile Include="Lib\Maps\roadmap1.cs" />
-    <Compile Include="Lib\Maps\DirtMap1.cs" />
     <Compile Include="Lib\Maps\RoadMap1.cs"/>
     <Compile Include="Lib\Player.cs" />
     <Compile Include="Lib\Upgrade.cs" />

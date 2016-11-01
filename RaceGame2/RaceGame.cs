@@ -14,12 +14,10 @@ namespace RaceGame2
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
         public Map map;
-        public RaceGame(List<Car> cars, Map map)
         private int upgradeTimer = 0;
         public List<Upgrade> upgrades = new List<Upgrade>();
         private int curUpgrade;
         private Point newPosition;
-        private Map map = new Map();
 
         public RaceGame(List<Car> cars,Map map)
         {

@@ -27,9 +27,6 @@ namespace RaceGame2.Lib.Maps
             this.upgrades.Add(new Point(730,400));
             this.upgrades.Add(new Point(960,125));
             this.upgrades.Add(new Point(960,710));
-            this.imageLocation = "road1.png";
-
-            setImage();
 
             this.imageLocation = "roadmap1.png";
             setImage();
