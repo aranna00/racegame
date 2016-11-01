@@ -57,6 +57,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.MapPreview = new System.Windows.Forms.PictureBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.ExitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Default1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Muscle1)).BeginInit();
@@ -71,9 +72,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Muscle2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MapPreview)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // button1
-            //
+            // 
             this.button1.Location = new System.Drawing.Point(464, 454);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -162,9 +163,9 @@
             this.pictureBox12.Size = new System.Drawing.Size(222, 377);
             this.pictureBox12.TabIndex = 11;
             this.pictureBox12.TabStop = false;
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Location = new System.Drawing.Point(774, 77);
@@ -173,9 +174,9 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "Player 2";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            //
+            // 
             // label2
-            //
+            // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(175, 77);
@@ -184,9 +185,9 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Player 1";
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            //
+            // 
             // label3
-            //
+            // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(180, 275);
@@ -231,15 +232,16 @@
             //
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-                "Black",
-                "Blue",
-                "Green",
-                "Orange",
-                "Yellow"});
+            "Black",
+            "Blue",
+            "Green",
+            "Orange",
+            "Yellow"});
             this.comboBox1.Location = new System.Drawing.Point(741, 194);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 36;
+            this.comboBox1.Text = "Choose your colour";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             //
             // label8
@@ -248,9 +250,9 @@
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Location = new System.Drawing.Point(784, 172);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(31, 13);
+            this.label8.Size = new System.Drawing.Size(37, 13);
             this.label8.TabIndex = 38;
-            this.label8.Text = "Color";
+            this.label8.Text = "Colour";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             //
             // label7
@@ -259,23 +261,24 @@
             this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(186, 172);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.Size = new System.Drawing.Size(37, 13);
             this.label7.TabIndex = 40;
-            this.label7.Text = "Color";
+            this.label7.Text = "Colour";
             //
             // comboBox4
             //
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
-                "Black",
-                "Blue",
-                "Green",
-                "Orange",
-                "Yellow"});
+            "Black",
+            "Blue",
+            "Green",
+            "Orange",
+            "Yellow"});
             this.comboBox4.Location = new System.Drawing.Point(143, 194);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 42;
+            this.comboBox4.Text = "Choose your colour";
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             //
             // Racer2
@@ -372,8 +375,8 @@
             //
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-                "Map 1",
-                "Map 2"});
+            "Map 1",
+            "Map 2"});
             this.comboBox2.Location = new System.Drawing.Point(464, 368);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(75, 21);
@@ -397,11 +400,11 @@
             //
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-                "1 Lap",
-                "2 Laps",
-                "3 Laps",
-                "4 Laps",
-                "5 Laps"});
+            "1 Lap",
+            "2 Laps",
+            "3 Laps",
+            "4 Laps",
+            "5 Laps"});
             this.comboBox3.Location = new System.Drawing.Point(464, 398);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(75, 21);
@@ -409,12 +412,23 @@
             this.comboBox3.Text = "Pick laps";
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             //
-            // Form1
+            // ExitButton
             //
+            this.ExitButton.Location = new System.Drawing.Point(464, 483);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.TabIndex = 49;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // Form1
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label9);
@@ -444,6 +458,10 @@
             this.Controls.Add(this.Default1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 768);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1024, 768);
             this.Name = "Form1";
             this.Text = "Generic race game title";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -497,6 +515,7 @@
         private System.Windows.Forms.Timer rotationTimer;
         private System.Windows.Forms.PictureBox MapPreview;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button ExitButton;
     }
 }
 

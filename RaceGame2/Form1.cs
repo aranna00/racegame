@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RaceGame2.Lib;
 using RaceGame2.Lib.Cars;
+using RaceGame2.Lib.Maps;
 
 namespace RaceGame2
 {
@@ -18,6 +20,11 @@ namespace RaceGame2
         private PictureBox selectedCar1;
         private PictureBox selectedCar2;
         private int counter;
+        private List<Car> cars = new List<Car>();
+        private Map selectedMap;
+        private int laps;
+        private RaceGame raceForm;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,12 +35,38 @@ namespace RaceGame2
             rotationTimer.Interval = 1;
             rotationTimer.Enabled = true;
             counter = 0;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Text = "Vette game";
+            raceForm?.Close();
+            if (cars.Count != 0)
+            {
+                cars.RemoveRange(0,2);
+            }
+            var assembly = Assembly.GetExecutingAssembly();
+            var player1Type = assembly.GetTypes().First(t => t.Name == selectedCar1.Name.Remove(selectedCar1.Name.Length-1));
+            var player2Type = assembly.GetTypes().First(t => t.Name == selectedCar2.Name.Remove(selectedCar2.Name.Length-1));
+            Car player1Car = (Car)Activator.CreateInstance(player1Type);
+            Car player2Car = (Car)Activator.CreateInstance(player2Type);
+            player1Car.SetImage(comboBox4.Text);
+            player2Car.SetImage(comboBox1.Text);
+            player1Car.setControls(Keys.Left,Keys.Right,Keys.Up,Keys.Down);
+            player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
+            cars.Add(player1Car);
+            cars.Add(player2Car);
+            selectedMap = new Map(cars);
+            raceForm = new RaceGame(cars,selectedMap);
+            raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
+            raceForm.Show();
+            this.Hide();
+            raceForm.Focus();
+        }
+
+        private void RaceFormOnClosingEventhandler(object sender, FormClosingEventArgs e)
+        {
+            raceForm.timerGameTicks.Tick -= raceForm.timerGameTicks_Tick;
+            this.Show();
         }
 
 
@@ -41,6 +74,7 @@ namespace RaceGame2
         {
 
         }
+
 
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -57,48 +91,7 @@ namespace RaceGame2
 
         void rotationTimer_Tick(object sender, EventArgs e)
         {
-            /*
-                        Image flipImage;
-            String comboText = comboBox4.Text;
-            Image nothingImage = new Bitmap(Path.Combine(Environment.CurrentDirectory, "assets/NothingImg.png"));
-            if (comboText != "")
-            {
-                string imageLocation = "assets/cars/" + comboBox4.Text + "/" +
-                                       selectedCar1.Name.Remove(selectedCar1.Name.Length - 1) + ".png";
-                flipImage = new Bitmap(Path.Combine(Environment.CurrentDirectory, imageLocation));
-                Size imageSize = new Size(flipImage.Width/3, flipImage.Height/3);
-                flipImage = new Bitmap(flipImage, imageSize);
 
-
-                   }
-                   else
-                   {
-                       flipImage = nothingImage;
-                   }
-
-                   if (flipImage == null)
-                   {
-                       flipImage = nothingImage;
-                   }
-                   selectedCar1.Image = nothingImage;
-                   using (Graphics g = Graphics.FromImage(flipImage))
-                   {
-                       g.TranslateTransform(0,0);
-                       g.RotateTransform(counter);
-                       System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(0, 0, 5, 5);
-                       g.TranslateTransform(-(float)flipImage.Height / 6, -(float)flipImage.Width / 10);
-                       g.DrawImage(flipImage, (float)flipImage.Height / 6, -(float)flipImage.Width / 10);
-                       g.DrawEllipse(System.Drawing.Pens.Black, rectangle);
-                       g.ResetTransform();
-
-                   }
-
-                   counter++;
-       //            flipImage = new Bitmap(flipImage.Height,flipImage.Width ,g);
-                   selectedCar1.Image = flipImage;
-
-        }
-        */
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -122,7 +115,7 @@ namespace RaceGame2
         {
             if (comboBox4.Text == comboBox1.Text)
             {
-                WarningLabel.Text = "Player 1 and Player 2 can't be the same color";
+                WarningLabel.Text = "Player 1 and Player 2 can't be the same colour";
             }
             else
             {
@@ -151,7 +144,6 @@ namespace RaceGame2
 
 
             }
-
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -201,7 +193,7 @@ namespace RaceGame2
         {
             if (comboBox4.Text == comboBox1.Text)
             {
-                WarningLabel.Text = "Player 1 and Player 2 can't be the same color";
+                WarningLabel.Text = "Player 1 and Player 2 can't be the same colour";
             }
             else
             {
@@ -326,6 +318,11 @@ namespace RaceGame2
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

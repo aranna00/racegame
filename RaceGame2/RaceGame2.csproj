@@ -53,19 +53,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-      <Compile Include="Lib\Car.cs"/>
-      <Compile Include="Lib\Cars\Default.cs"/>
-      <Compile Include="Lib\Cars\Drifter.cs"/>
-      <Compile Include="Lib\Cars\Muscle.cs"/>
-      <Compile Include="Lib\Cars\Pickup.cs"/>
-      <Compile Include="Lib\Cars\Racer.cs"/>
-      <Compile Include="Lib\Logger.cs"/>
-      <Compile Include="Lib\Map.cs"/>
-      <Compile Include="Lib\Player.cs"/>
-      <Compile Include="Lib\Upgrade.cs"/>
+    <Compile Include="Lib\Car.cs" />
+    <Compile Include="Lib\Cars\Default.cs" />
+    <Compile Include="Lib\Cars\Drifter.cs" />
+    <Compile Include="Lib\Cars\Muscle.cs" />
+    <Compile Include="Lib\Cars\Pickup.cs" />
+    <Compile Include="Lib\Cars\Racer.cs" />
+    <Compile Include="Lib\Logger.cs" />
+    <Compile Include="Lib\Map.cs" />
+    <Compile Include="Lib\Maps\DirtMap1.cs" />
+    <Compile Include="Lib\Maps\roadmap1.cs" />
+    <Compile Include="Lib\Player.cs" />
+    <Compile Include="Lib\Upgrade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-      <!--<Compile Include="RaceGame.cs"/>-->
+      <Compile Include="RaceGame.cs">
+          <SubType>Form</SubType>
+      </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,7 +96,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-      <Content Include="packages.config"/>
+    <Content Include="assets\maps\road1.png" />
+    <Content Include="packages.config" />
   </ItemGroup>
     <ItemGroup>
         <Content Include="RaceGame2.csproj"/>
@@ -124,12 +129,8 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="assets/cars/">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Folder>
-        <Folder Include="Lib\Cars"/>
-        <Folder Include="Lib\maps"/>
-        <Folder Include="Lib\Upgrades"/>
+        <Folder Include="Lib\Maps\"/>
+        <Folder Include="Lib\Upgrades\"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -142,7 +143,7 @@
       </ItemGroup>
   </Target>
     <!--
-    <Target Name="AfterBuild">
-    </Target>
-    -->
+      <Target Name="AfterBuild">
+      </Target>
+      -->
 </Project>
