@@ -24,7 +24,7 @@ namespace RaceGame2.Lib
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
 
-    public Map()
+    public Map(List<Car> cars)
         {
             //setImage();
         }
@@ -68,7 +68,6 @@ namespace RaceGame2.Lib
         {
             if (mapImage == null)
             {
-                Debug.WriteLine("4");
                 return false;
             }
             if (x > 0 && y > 0 && x < mapImage.Width && y < mapImage.Height)
@@ -76,14 +75,11 @@ namespace RaceGame2.Lib
                 Color color = mapImage.GetPixel(x, y);
                 if (color.R > 150)
                 {
-                    Debug.WriteLine("1");
                     return true;
                 }
-                Debug.WriteLine("2");
                 return false;
 
             }
-            Debug.WriteLine("3 " + mapImage.Width + "," + mapImage.Height);
             return false;
         }
 
