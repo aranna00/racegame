@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +52,11 @@ namespace RaceGame2
                 MessageBox.Show("Please select different car colours", "Same car colours");
                 return;
             }
+            if (comboBox2.Text == "Pick map")
+            {
+                MessageBox.Show("Please select a map", "No map selected");
+                return;
+            }
             raceForm?.Close();
             if (cars.Count != 0)
             {
@@ -68,10 +73,13 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
-            this.selectedMap = new Map();
+            var test = assembly.GetTypes().First(t => t.Name == comboBox2.Text);
+            this.selectedMap = (Map)Activator.CreateInstance(test);
+            this.selectedMap.laps = comboBox3.SelectedIndex + 1;
             this.selectedMap.cars = cars;
             this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
+            raceForm.map = selectedMap;
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
             raceForm.Show();
             this.Hide();
@@ -214,12 +222,7 @@ namespace RaceGame2
             {
                 WarningLabel.Text = "";
             }
-            List<PictureBox> player1Images = new List<PictureBox>();
-            player1Images.Add(Default1);
-            player1Images.Add(Muscle1);
-            player1Images.Add(Drifter1);
-            player1Images.Add(Pickup1);
-            player1Images.Add(Racer1);
+            List<PictureBox> player1Images = new List<PictureBox> {Default1, Muscle1, Drifter1, Pickup1, Racer1};
             foreach (PictureBox imgBox in player1Images)
             {
                 String imageLocation = imgBox.Name.Remove(imgBox.Name.Length-1)+".png";

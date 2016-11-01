@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Net.Mime;
 using System.Windows.Forms;
 
 namespace RaceGame2.Lib
@@ -35,6 +33,7 @@ namespace RaceGame2.Lib
             imageLocation = ("assets\\maps\\" + this.imageLocation);
             imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
+            imageBitmap.Save("blargh.png");
             Size imageSize = new Size(1024, 768);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;

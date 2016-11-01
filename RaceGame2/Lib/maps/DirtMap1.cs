@@ -11,7 +11,6 @@ namespace RaceGame2.Lib.Maps
     {
         public DirtMap1()
         {
-            this.laps = 1;
             this.startingLine.Add(new Point(466,308));
             this.startingLine.Add(new Point(466, 351));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(343, 302), new Point(423, 374) }));
@@ -24,8 +23,8 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(163, 484));
             this.respawn.Add(new Point(132, 433));
 
-         this.imageLocation = "dirtmap1.png";
-          setImage();
+            this.imageLocation = "dirtmap1.png";
+            setImage();
             
         }   
              

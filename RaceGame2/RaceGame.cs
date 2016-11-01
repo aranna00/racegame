@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using RaceGame2.Lib;
-using RaceGame2.Lib.Cars;
 
 namespace RaceGame2
 {
@@ -14,10 +12,13 @@ namespace RaceGame2
 
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
-        public RaceGame(List<Car> cars,Map map)
+        public Map map;
+        public RaceGame(List<Car> cars, Map map)
         {
+            this.BackgroundImage = map.getImage();
             this.init();
             this.cars = cars;
+            this.map = map;
 
             this.SetStyle(
                 ControlStyles.UserPaint |
@@ -59,8 +60,9 @@ namespace RaceGame2
             Backbuffer = new Bitmap(ClientSize.Width, ClientSize.Height);
         }
 
-        void Draw(Graphics g) {
-
+        void Draw(Graphics g)
+        {
+//            g.DrawImage(map.getImage(),x: map.getImage().Height,y: map.getImage().Width);
             foreach (Car car in cars)
             {
                 var pos = car.getPosition();

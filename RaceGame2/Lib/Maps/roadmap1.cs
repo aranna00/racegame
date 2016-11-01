@@ -11,7 +11,6 @@ namespace RaceGame2.Lib.Maps
     {
         public RoadMap1()
         {
-            this.laps = 3;
             this.startingLine.Add(new Point(213, 730));
             this.startingLine.Add(new Point(239, 710));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(116, 701), new Point(168, 753) }));
@@ -24,9 +23,8 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(358, 689));
             this.respawn.Add(new Point(886, 200));
 
-           // this.imageLocation = "road1.png";
-           
-           // setImage();
+            this.imageLocation = "roadmap1.png";
+            setImage();
         }
     }
 }
