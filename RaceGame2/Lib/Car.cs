@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
+using System.Net.Mime;
 using System.Windows.Forms;
 
 namespace RaceGame2.Lib
@@ -13,8 +16,8 @@ namespace RaceGame2.Lib
         public int grip;
         public int health;
         public int maxHealth;
-        public int weight;
-        public float fuel = 100;
+        public int weight = 3;
+        public float fuel = 100000;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
@@ -33,7 +36,8 @@ namespace RaceGame2.Lib
         public int lapCounter = 0;
         public String imageLocation;
         public float handeling = 0.015f;
-        private float driftAngle;
+        private int counter;
+        public float Force,ForceAngle,ForceX,ForceY;
 
 
         /// <summary>
@@ -96,7 +100,6 @@ namespace RaceGame2.Lib
 
         public void handleKeyUpEvent(KeyEventArgs keys)
         {
-            ;
             if (leftKey == keys.KeyCode)
                 leftPressed = false;
             if (rightKey == keys.KeyCode)
@@ -122,6 +125,14 @@ namespace RaceGame2.Lib
             return image;
         }
 
+        public void calcForce()
+        {
+            Force = (float) speed * weight;
+            ForceAngle = rotation;
+            ForceX = (float) Math.Cos(ForceAngle) * Force;
+            ForceY = (float) Math.Sin(ForceAngle) * Force;
+        }
+
         private void accelerate()
         {
             if (fuel > 0 && speed >= 0)
@@ -130,10 +141,8 @@ namespace RaceGame2.Lib
                 CalcFuel();
                 if (speed >= maxSpeed)
                 {
-                   speed = maxSpeed;
-
+                    speed = maxSpeed;
                 }
-
             }
             else if (fuel > 0 && speed < 0)
             {
@@ -220,6 +229,10 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
+            if (!Map.onTrack(position.X, position.Y))
+            {
+                speed = speed * 0.95;
+            }
             prevPosition = position;
             positionX += (float) (speed * Math.Cos(rotation)); //pure magic here!
             positionY += (float) (speed * Math.Sin(rotation)); //more magic here
@@ -242,14 +255,15 @@ namespace RaceGame2.Lib
             position.X = (int) Math.Round(positionX);
             position.Y = (int) Math.Round(positionY);
             float angle =
-                    (float)
-                    (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
-                         this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
+                (float)
+                (Math.Atan2(this.getPrevPosition().Y - this.getPosition().Y,
+                     this.getPrevPosition().X - this.getPosition().X) * (180 / Math.PI));
             if (Math.Abs(angle) > 2)
             {
                 this.angle = angle;
             }
             changeSpeed();
+            calcForce();
         }
 
         public float getAngle()
@@ -282,6 +296,4 @@ namespace RaceGame2.Lib
             }
         }
     }
-
 }
-                    
