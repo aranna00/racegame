@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Net.Mime;
 using System.Windows.Forms;
 
 namespace RaceGame2.Lib
@@ -19,14 +18,17 @@ namespace RaceGame2.Lib
         public List<Point> respawn = new List<Point>();
         public string imageLocation;
         public Image image;
+        private static Bitmap mapImage;
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
         public List<Point> upgrades = new List<Point>();
         private int upgradeCounter=0;
-        
 
-        public Map()
+
+        public void setCarsStartingPoints()
         {
+            cars[0].setPosistion(startingLine[0]);
+            cars[1].setPosistion(startingLine[1]);
         }
 
 
@@ -35,9 +37,11 @@ namespace RaceGame2.Lib
             imageLocation = ("assets\\maps\\" + this.imageLocation);
             imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
+            imageBitmap.Save("blargh.png");
             Size imageSize = new Size(1024, 768);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;
+            mapImage = (Bitmap)image;
         }
 
         public void Position()
@@ -58,6 +62,47 @@ namespace RaceGame2.Lib
             }
             upgradeCounter++;
 
+        //        public void checkpointChecker()
+        //        {
+        //            int counter = 0;
+        //            {
+        //                foreach (Car car in cars)
+        //                {
+        //                    Point pos = car.getPosition();
+        //                    if ((pos.X >= checkpoint[0].X && pos.X <= checkpoint[1].X) &&
+        //                        (pos.Y >= checkpoint[0].Y && pos.Y <= checkpoint[1].Y))
+        //                    {
+        //                        if (car.checkpointCounter == 0 && counter == 0)
+        //                        {
+        //                            car.checkpointCounter++;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        public Image getImage()
+        {
+            return this.image;
+        }
+
+        public static Boolean onTrack(int x, int y)
+        {
+            if (mapImage == null)
+            {
+                return false;
+            }
+            if (x > 0 && y > 0 && x < mapImage.Width && y < mapImage.Height)
+            {
+                Color color = mapImage.GetPixel(x, y);
+                if (color.R > 150)
+                {
+                    return true;
+                }
+                return false;
+
+            }
+            return false;
         }
 
         public void checkpointChecker()

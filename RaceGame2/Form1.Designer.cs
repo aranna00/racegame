@@ -82,9 +82,9 @@
             this.button1.Text = "Start game";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            //
+            // 
             // pictureBox1
-            //
+            // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Location = new System.Drawing.Point(92, 100);
             this.pictureBox1.Name = "pictureBox1";
@@ -92,9 +92,9 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            //
+            // 
             // Default1
-            //
+            // 
             this.Default1.BackColor = System.Drawing.SystemColors.Control;
             this.Default1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Default1.InitialImage = null;
@@ -105,9 +105,9 @@
             this.Default1.TabIndex = 5;
             this.Default1.TabStop = false;
             this.Default1.Click += new System.EventHandler(this.pictureBox2_Click);
-            //
+            // 
             // Muscle1
-            //
+            // 
             this.Muscle1.BackColor = System.Drawing.SystemColors.Control;
             this.Muscle1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Muscle1.Cursor = System.Windows.Forms.Cursors.Arrow;
@@ -118,9 +118,9 @@
             this.Muscle1.TabIndex = 6;
             this.Muscle1.TabStop = false;
             this.Muscle1.Click += new System.EventHandler(this.Muscle1_Click);
-            //
+            // 
             // Drifter1
-            //
+            // 
             this.Drifter1.BackColor = System.Drawing.SystemColors.Control;
             this.Drifter1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Drifter1.Location = new System.Drawing.Point(239, 303);
@@ -130,9 +130,9 @@
             this.Drifter1.TabIndex = 7;
             this.Drifter1.TabStop = false;
             this.Drifter1.Click += new System.EventHandler(this.pictureBox4_Click);
-            //
+            // 
             // Racer1
-            //
+            // 
             this.Racer1.BackColor = System.Drawing.SystemColors.Control;
             this.Racer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Racer1.Location = new System.Drawing.Point(204, 368);
@@ -142,9 +142,9 @@
             this.Racer1.TabIndex = 10;
             this.Racer1.TabStop = false;
             this.Racer1.Click += new System.EventHandler(this.Racer1_Click);
-            //
+            // 
             // Pickup1
-            //
+            // 
             this.Pickup1.BackColor = System.Drawing.SystemColors.Control;
             this.Pickup1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Pickup1.Location = new System.Drawing.Point(136, 368);
@@ -154,9 +154,9 @@
             this.Pickup1.TabIndex = 8;
             this.Pickup1.TabStop = false;
             this.Pickup1.Click += new System.EventHandler(this.Pickup1_Click);
-            //
+            // 
             // pictureBox12
-            //
+            // 
             this.pictureBox12.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox12.Location = new System.Drawing.Point(687, 100);
             this.pictureBox12.Name = "pictureBox12";
@@ -196,9 +196,9 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "Type";
             this.label3.Click += new System.EventHandler(this.label3_Click);
-            //
+            // 
             // label4
-            //
+            // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(778, 275);
@@ -207,9 +207,9 @@
             this.label4.TabIndex = 28;
             this.label4.Text = "Type";
             this.label4.Click += new System.EventHandler(this.label4_Click);
-            //
+            // 
             // label5
-            //
+            // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(752, 117);
@@ -217,9 +217,9 @@
             this.label5.Size = new System.Drawing.Size(96, 13);
             this.label5.TabIndex = 29;
             this.label5.Text = "Customize your car";
-            //
+            // 
             // label6
-            //
+            // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(158, 117);
@@ -227,9 +227,9 @@
             this.label6.Size = new System.Drawing.Size(96, 13);
             this.label6.TabIndex = 30;
             this.label6.Text = "Customize your car";
-            //
+            // 
             // comboBox1
-            //
+            // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Black",
@@ -243,9 +243,9 @@
             this.comboBox1.TabIndex = 36;
             this.comboBox1.Text = "Choose your colour";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            //
+            // 
             // label8
-            //
+            // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Location = new System.Drawing.Point(784, 172);
@@ -254,9 +254,9 @@
             this.label8.TabIndex = 38;
             this.label8.Text = "Colour";
             this.label8.Click += new System.EventHandler(this.label8_Click);
-            //
+            // 
             // label7
-            //
+            // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(186, 172);
@@ -264,9 +264,9 @@
             this.label7.Size = new System.Drawing.Size(37, 13);
             this.label7.TabIndex = 40;
             this.label7.Text = "Colour";
-            //
+            // 
             // comboBox4
-            //
+            // 
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
             "Black",
@@ -280,9 +280,9 @@
             this.comboBox4.TabIndex = 42;
             this.comboBox4.Text = "Choose your colour";
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
-            //
+            // 
             // Racer2
-            //
+            // 
             this.Racer2.BackColor = System.Drawing.SystemColors.Control;
             this.Racer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Racer2.Location = new System.Drawing.Point(800, 368);
@@ -292,9 +292,9 @@
             this.Racer2.TabIndex = 35;
             this.Racer2.TabStop = false;
             this.Racer2.Click += new System.EventHandler(this.pictureBox13_Click);
-            //
+            // 
             // Default2
-            //
+            // 
             this.Default2.BackColor = System.Drawing.SystemColors.Control;
             this.Default2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Default2.InitialImage = null;
@@ -305,9 +305,9 @@
             this.Default2.TabIndex = 31;
             this.Default2.TabStop = false;
             this.Default2.Click += new System.EventHandler(this.pictureBox17_Click);
-            //
+            // 
             // Pickup2
-            //
+            // 
             this.Pickup2.BackColor = System.Drawing.SystemColors.Control;
             this.Pickup2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Pickup2.Location = new System.Drawing.Point(732, 368);
@@ -317,9 +317,9 @@
             this.Pickup2.TabIndex = 34;
             this.Pickup2.TabStop = false;
             this.Pickup2.Click += new System.EventHandler(this.Pickup2_Click);
-            //
+            // 
             // Drifter2
-            //
+            // 
             this.Drifter2.BackColor = System.Drawing.SystemColors.Control;
             this.Drifter2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Drifter2.Location = new System.Drawing.Point(835, 303);
@@ -329,9 +329,9 @@
             this.Drifter2.TabIndex = 33;
             this.Drifter2.TabStop = false;
             this.Drifter2.Click += new System.EventHandler(this.Drifter2_Click);
-            //
+            // 
             // Muscle2
-            //
+            // 
             this.Muscle2.BackColor = System.Drawing.SystemColors.Control;
             this.Muscle2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Muscle2.Location = new System.Drawing.Point(767, 303);
@@ -341,27 +341,27 @@
             this.Muscle2.TabIndex = 32;
             this.Muscle2.TabStop = false;
             this.Muscle2.Click += new System.EventHandler(this.Muscle2_Click);
-            //
+            // 
             // WarningLabel
-            //
+            // 
             this.WarningLabel.AutoSize = true;
-            this.WarningLabel.Location = new System.Drawing.Point(391, 490);
+            this.WarningLabel.Location = new System.Drawing.Point(391, 515);
             this.WarningLabel.Name = "WarningLabel";
             this.WarningLabel.Size = new System.Drawing.Size(0, 13);
             this.WarningLabel.TabIndex = 43;
             this.WarningLabel.Click += new System.EventHandler(this.WarningLabel_Click);
-            //
+            // 
             // button3
-            //
+            // 
             this.button3.Location = new System.Drawing.Point(464, 425);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 44;
             this.button3.Text = "Highscores";
             this.button3.UseVisualStyleBackColor = true;
-            //
+            // 
             // label9
-            //
+            // 
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Location = new System.Drawing.Point(461, 77);
             this.label9.Name = "label9";
@@ -370,22 +370,22 @@
             this.label9.Text = "Map preview";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label9.Click += new System.EventHandler(this.label9_Click);
-            //
+            // 
             // comboBox2
-            //
+            // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Map 1",
-            "Map 2"});
+            "RoadMap1",
+            "DirtMap1"});
             this.comboBox2.Location = new System.Drawing.Point(464, 368);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(75, 21);
             this.comboBox2.TabIndex = 47;
             this.comboBox2.Text = "Pick map";
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            //
+            // 
             // MapPreview
-            //
+            // 
             this.MapPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.MapPreview.InitialImage = null;
             this.MapPreview.Location = new System.Drawing.Point(320, 100);
@@ -395,9 +395,9 @@
             this.MapPreview.TabIndex = 45;
             this.MapPreview.TabStop = false;
             this.MapPreview.Click += new System.EventHandler(this.pictureBox2_Click_1);
-            //
+            // 
             // comboBox3
-            //
+            // 
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             "1 Lap",
@@ -411,9 +411,9 @@
             this.comboBox3.TabIndex = 48;
             this.comboBox3.Text = "Pick laps";
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            //
+            // 
             // ExitButton
-            //
+            // 
             this.ExitButton.Location = new System.Drawing.Point(464, 483);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(75, 23);

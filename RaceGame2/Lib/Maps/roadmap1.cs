@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace RaceGame2.Lib.Maps
 {
-    class roadmap1 : Map
+    class RoadMap1 : Map
     {
-        public roadmap1(List<Car> cars) : base()
+        public RoadMap1()
         {
-            this.cars = cars;
-            this.laps = 3;
             this.startingLine.Add(new Point(213, 730));
             this.startingLine.Add(new Point(239, 710));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(116, 701), new Point(168, 753) }));
@@ -30,7 +28,10 @@ namespace RaceGame2.Lib.Maps
             this.upgrades.Add(new Point(960,125));
             this.upgrades.Add(new Point(960,710));
             this.imageLocation = "road1.png";
-           
+
+            setImage();
+
+            this.imageLocation = "roadmap1.png";
             setImage();
         }
     }

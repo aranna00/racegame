@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -28,8 +30,8 @@ namespace RaceGame2
         public Form1()
         {
             InitializeComponent();
-            selectedCar1 = Default1;
-            selectedCar2 = Default2;
+//            selectedCar1 = Default1;
+//            selectedCar2 = Default2;
             rotationTimer = new System.Windows.Forms.Timer();
             rotationTimer.Tick += new EventHandler(rotationTimer_Tick);
             rotationTimer.Interval = 1;
@@ -39,6 +41,22 @@ namespace RaceGame2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine(selectedCar1);
+            if (selectedCar1 == null || selectedCar2 == null)
+            {
+                MessageBox.Show("Please select a car type", "No car type selected");
+                return;
+            }
+            if (comboBox4.Text == comboBox1.Text)
+            {
+                MessageBox.Show("Please select different car colours", "Same car colours");
+                return;
+            }
+            if (comboBox2.Text == "Pick map")
+            {
+                MessageBox.Show("Please select a map", "No map selected");
+                return;
+            }
             raceForm?.Close();
             if (cars.Count != 0)
             {
@@ -55,10 +73,13 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
-            selectedMap = new Map();
-
-
+            var test = assembly.GetTypes().First(t => t.Name == comboBox2.Text);
+            this.selectedMap = (Map)Activator.CreateInstance(test);
+            this.selectedMap.laps = comboBox3.SelectedIndex + 1;
+            this.selectedMap.cars = cars;
+            this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
+            raceForm.map = selectedMap;
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
             raceForm.Show();
             this.Hide();
@@ -201,12 +222,7 @@ namespace RaceGame2
             {
                 WarningLabel.Text = "";
             }
-            List<PictureBox> player1Images = new List<PictureBox>();
-            player1Images.Add(Default1);
-            player1Images.Add(Muscle1);
-            player1Images.Add(Drifter1);
-            player1Images.Add(Pickup1);
-            player1Images.Add(Racer1);
+            List<PictureBox> player1Images = new List<PictureBox> {Default1, Muscle1, Drifter1, Pickup1, Racer1};
             foreach (PictureBox imgBox in player1Images)
             {
                 String imageLocation = imgBox.Name.Remove(imgBox.Name.Length-1)+".png";

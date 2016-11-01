@@ -63,6 +63,8 @@
     <Compile Include="Lib\Map.cs" />
     <Compile Include="Lib\Maps\Dirtmap.cs" />
     <Compile Include="Lib\Maps\roadmap1.cs" />
+    <Compile Include="Lib\Maps\DirtMap1.cs" />
+    <Compile Include="Lib\Maps\RoadMap1.cs"/>
     <Compile Include="Lib\Player.cs" />
     <Compile Include="Lib\Upgrade.cs" />
     <Compile Include="Program.cs" />
@@ -96,7 +98,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\maps\road1.png" />
+    <Content Include="assets\maps\roadmap1.png"/>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

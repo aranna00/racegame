@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using RaceGame2.Lib;
-using RaceGame2.Lib.Cars;
 
 namespace RaceGame2
 {
@@ -15,6 +13,8 @@ namespace RaceGame2
 
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
+        public Map map;
+        public RaceGame(List<Car> cars, Map map)
         private int upgradeTimer = 0;
         public List<Upgrade> upgrades = new List<Upgrade>();
         private int curUpgrade;
@@ -23,8 +23,10 @@ namespace RaceGame2
 
         public RaceGame(List<Car> cars,Map map)
         {
+            this.BackgroundImage = map.getImage();
             this.init();
             this.cars = cars;
+            this.map = map;
 
             this.SetStyle(
                 ControlStyles.UserPaint |
@@ -111,13 +113,13 @@ namespace RaceGame2
                 upgrades[curUpgrade].setPosition(newPosition);
                 upgradeTimer = 0;
             }
-            else 
+            else
             {
                 upgradeTimer++;
             }
         }
 
-        
+
 
         #region Windows Form Designer generated code
         private void init()
