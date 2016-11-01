@@ -18,7 +18,7 @@ namespace RaceGame2.Lib
         public int grip;
         public int health;
         public int maxHealth;
-        public int weight;
+        public int weight = 3;
         public float fuel = 100000;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
@@ -38,7 +38,7 @@ namespace RaceGame2.Lib
         public int lapCounter = 0;
         public float handeling = 0.015f;
         private int counter;
-        //private Image mapImage = new Map().image;
+        public float Force,ForceAngle,ForceX,ForceY;
 
 
         /// <summary>
@@ -116,6 +116,14 @@ namespace RaceGame2.Lib
         public Image getImage()
         {
             return image;
+        }
+
+        public void calcForce()
+        {
+            Force = (float) speed * weight;
+            ForceAngle = rotation;
+            ForceX = (float) Math.Cos(ForceAngle) * Force;
+            ForceY = (float) Math.Sin(ForceAngle) * Force;
         }
 
         private void accelerate()
@@ -232,6 +240,7 @@ namespace RaceGame2.Lib
                 this.angle = angle;
             }
             changeSpeed();
+            calcForce();
         }
 
         public float getAngle()
