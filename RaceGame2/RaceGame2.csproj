@@ -62,14 +62,14 @@
     <Compile Include="Lib\Logger.cs" />
     <Compile Include="Lib\Map.cs" />
     <Compile Include="Lib\Maps\DirtMap1.cs" />
-    <Compile Include="Lib\Maps\RoadMap1.cs" />
+      <Compile Include="Lib\Maps\RoadMap1.cs"/>
     <Compile Include="Lib\Player.cs" />
     <Compile Include="Lib\Upgrade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RaceGame.cs">
-      <SubType>Form</SubType>
-    </Compile>
+      <Compile Include="RaceGame.cs">
+          <SubType>Form</SubType>
+      </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,51 +99,51 @@
     <Content Include="assets\maps\road1.png" />
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="RaceGame2.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets/**/*">
+    <ItemGroup>
+        <Content Include="RaceGame2.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="assets/**/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Form1.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Form1.Designer.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Form1.resx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="packages.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Program.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="RaceGame2.csproj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Lib\Maps\" />
-    <Folder Include="Lib\Upgrades\" />
+        <Content Include="App.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Form1.cs">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Form1.Designer.cs">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Form1.resx">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="packages.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Program.cs">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="RaceGame2.csproj">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Lib\Maps\"/>
+        <Folder Include="Lib\Upgrades\"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="BeforeBuild">
-    <ItemGroup>
-      <Content Include="assets/**/*">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
+      <ItemGroup>
+          <Content Include="assets/**/*">
+              <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          </Content>
+      </ItemGroup>
   </Target>
-  <!--
-      <Target Name="AfterBuild">
-      </Target>
-      -->
+    <!--
+        <Target Name="AfterBuild">
+        </Target>
+        -->
 </Project>

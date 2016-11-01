@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -28,8 +30,8 @@ namespace RaceGame2
         public Form1()
         {
             InitializeComponent();
-            selectedCar1 = Default1;
-            selectedCar2 = Default2;
+//            selectedCar1 = Default1;
+//            selectedCar2 = Default2;
             rotationTimer = new System.Windows.Forms.Timer();
             rotationTimer.Tick += new EventHandler(rotationTimer_Tick);
             rotationTimer.Interval = 1;
@@ -39,6 +41,17 @@ namespace RaceGame2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine(selectedCar1);
+            if (selectedCar1 == null || selectedCar2 == null)
+            {
+                MessageBox.Show("Please select a car type", "No car type selected");
+                return;
+            }
+            if (comboBox4.Text == comboBox1.Text)
+            {
+                MessageBox.Show("Please select different car colours", "Same car colours");
+                return;
+            }
             raceForm?.Close();
             if (cars.Count != 0)
             {
@@ -55,7 +68,8 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
-            this.selectedMap = new Map(cars);
+            this.selectedMap = new Map();
+            this.selectedMap.cars = cars;
             this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);

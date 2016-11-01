@@ -11,7 +11,6 @@ namespace RaceGame2.Lib.Maps
     {
         public RoadMap1()
         {
-            this.cars = cars;
             this.laps = 3;
             this.startingLine.Add(new Point(213, 730));
             this.startingLine.Add(new Point(239, 710));
