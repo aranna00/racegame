@@ -9,9 +9,8 @@ namespace RaceGame2.Lib.Maps
 {   
     class DirtMap1 : Map
     {
-        public DirtMap1(List<Car> cars) : base(cars)
+        public DirtMap1()
         {
-            this.cars = cars;
             this.laps = 1;
             this.startingLine.Add(new Point(466,308));
             this.startingLine.Add(new Point(466, 351));

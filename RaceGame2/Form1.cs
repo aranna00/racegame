@@ -55,7 +55,8 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
-            selectedMap = new Map(cars);
+            this.selectedMap = new Map(cars);
+            this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
             raceForm.Show();

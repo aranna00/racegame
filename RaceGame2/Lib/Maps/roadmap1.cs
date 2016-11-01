@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RaceGame2.Lib.Maps
 {
-    class roadmap1 : Map
+    class RoadMap1 : Map
     {
-        public roadmap1(List<Car> cars) : base(cars)
+        public RoadMap1()
         {
             this.cars = cars;
             this.laps = 3;

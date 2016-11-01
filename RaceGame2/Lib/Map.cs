@@ -20,10 +20,11 @@ namespace RaceGame2.Lib
         public Image image;
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
-        
 
-        public Map(List<Car> cars)
+        public void setCarsStartingPoints()
         {
+            cars[0].setPosistion(startingLine[0]);
+            cars[1].setPosistion(startingLine[1]);
         }
 
 
