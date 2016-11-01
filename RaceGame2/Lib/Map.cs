@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Mime;
@@ -20,9 +21,11 @@ namespace RaceGame2.Lib
         public Image image;
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
+        public List<Point> upgrades = new List<Point>();
+        private int upgradeCounter=0;
         
 
-        public Map(List<Car> cars)
+        public Map()
         {
         }
 
@@ -46,7 +49,16 @@ namespace RaceGame2.Lib
 
         }
 
-       
+        public void upgradeCirculation()
+        {
+            if (upgradeCounter == 300)
+            {
+
+                upgradeCounter = 0;
+            }
+            upgradeCounter++;
+
+        }
 
         public void checkpointChecker()
         {

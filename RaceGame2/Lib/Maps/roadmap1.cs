@@ -9,7 +9,7 @@ namespace RaceGame2.Lib.Maps
 {
     class roadmap1 : Map
     {
-        public roadmap1(List<Car> cars) : base(cars)
+        public roadmap1(List<Car> cars) : base()
         {
             this.cars = cars;
             this.laps = 3;
@@ -24,10 +24,14 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(82, 608));
             this.pitstop.Add(new Point(358, 689));
             this.respawn.Add(new Point(886, 200));
-
-           // this.imageLocation = "road1.png";
+            this.upgrades.Add(new Point(50,256));
+            this.upgrades.Add(new Point(405,311));
+            this.upgrades.Add(new Point(730,400));
+            this.upgrades.Add(new Point(960,125));
+            this.upgrades.Add(new Point(960,710));
+            this.imageLocation = "road1.png";
            
-           // setImage();
+            setImage();
         }
     }
 }

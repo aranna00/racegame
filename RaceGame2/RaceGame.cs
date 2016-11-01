@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
@@ -14,6 +15,12 @@ namespace RaceGame2
 
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
+        private int upgradeTimer = 0;
+        public List<Upgrade> upgrades = new List<Upgrade>();
+        private int curUpgrade;
+        private Point newPosition;
+        private Map map = new Map();
+
         public RaceGame(List<Car> cars,Map map)
         {
             this.init();
@@ -30,8 +37,15 @@ namespace RaceGame2
 
             this.KeyDown += new KeyEventHandler(RaceGame_KeyDown);
             this.KeyUp += new KeyEventHandler(RaceGame_KeyUp);
+            upgradeslist();
         }
 
+        public void upgradeslist()
+        {
+            List<String> upgradeImage = new List<String>();
+            upgradeImage.Add("tool.png");
+            upgradeImage.Add("star.png");
+        }
 
         void RaceGame_KeyUp(object sender, KeyEventArgs e) {
             foreach (Car car in cars)
@@ -69,6 +83,12 @@ namespace RaceGame2
                 g.DrawImage(car.getImage(), x: -(float)car.getImage().Height/4, y: -(float)car.getImage().Width);
                 g.ResetTransform();
             }
+            foreach (Upgrade upgrade in upgrades)
+            {
+                var pos = upgrade.getPosition();
+                g.TranslateTransform(pos.X, pos.Y);
+                g.DrawImage(upgrade.GetImage(), x: -(float)upgrade.GetImage().Height / 4, y: -(float)upgrade.GetImage().Width);
+            }
         }
 
         public void timerGameTicks_Tick(object sender, EventArgs e) {
@@ -78,6 +98,26 @@ namespace RaceGame2
             }
             Invalidate();
         }
+
+        public void spawnUpgrade()
+        {
+            if (upgradeTimer == 300)
+            {
+                upgrades.Add(new Upgrade());
+                curUpgrade = upgrades.Count - 1;
+                Random rnd = new Random();
+                int randomUpgrade = rnd.Next(0, map.upgrades.Count);
+                newPosition = map.upgrades[randomUpgrade];
+                upgrades[curUpgrade].setPosition(newPosition);
+                upgradeTimer = 0;
+            }
+            else 
+            {
+                upgradeTimer++;
+            }
+        }
+
+        
 
         #region Windows Form Designer generated code
         private void init()
