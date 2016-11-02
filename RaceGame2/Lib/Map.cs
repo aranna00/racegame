@@ -46,7 +46,6 @@ namespace RaceGame2.Lib
             cars[1].position = new Point(startingLine[1].X, startingLine[1].Y);
             cars[0].rotation= (float) Math.PI;
             cars[1].rotation = (float) Math.PI;
-
         }
 
 
@@ -92,6 +91,7 @@ namespace RaceGame2.Lib
 
             }
             return false;
+            return true;
         }
 
         public void checkpointChecker()

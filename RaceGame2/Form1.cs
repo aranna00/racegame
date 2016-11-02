@@ -73,6 +73,8 @@ namespace RaceGame2
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S);
             cars.Add(player1Car);
             cars.Add(player2Car);
+            cars[0].player = 1;
+            cars[1].player = 2;
             var test = assembly.GetTypes().First(t => t.Name == comboBox2.Text);
             this.selectedMap = (Map)Activator.CreateInstance(test);
             this.selectedMap.laps = comboBox3.SelectedIndex + 1;

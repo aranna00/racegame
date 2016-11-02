@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using RaceGame2.Lib;
@@ -13,6 +14,12 @@ namespace RaceGame2
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
         public Map map;
+        public float distance;
+        private float moveX, moveY;
+        public static bool collision, stuck;
+        public float ResForce, ResForceX, ResForceY, ResForceAngle, colX, colY;
+        public static Tuple<float, float> ForceResult;
+
         public RaceGame(List<Car> cars, Map map)
         {
             this.BackgroundImage = map.getImage();
@@ -66,9 +73,12 @@ namespace RaceGame2
             foreach (Car car in cars)
             {
                 var pos = car.getPosition();
-                g.TranslateTransform(pos.X, pos.Y);
+                float moveX = car.getImage().Height / 2f + pos.X;
+                float moveY = car.getImage().Width / 2f + pos.Y;
+                g.TranslateTransform(moveX , moveY );
                 g.RotateTransform(car.getRotation()*(float)(180/Math.PI)+90);
-                g.DrawImage(car.getImage(), x: -(float)car.getImage().Height/4, y: -(float)car.getImage().Width);
+                g.TranslateTransform(-moveX , -moveY );
+                g.DrawImage(car.getImage(), pos.X, pos.Y);
                 g.ResetTransform();
             }
         }
@@ -76,7 +86,9 @@ namespace RaceGame2
         public void timerGameTicks_Tick(object sender, EventArgs e) {
             foreach (Car car in cars)
             {
+                collideCar();
                 car.calculateNewPosition();
+
             }
             Invalidate();
         }
@@ -97,6 +109,36 @@ namespace RaceGame2
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+        }
+
+        public void collideCar()
+        {
+            distance = (float) Math.Sqrt(Math.Pow(cars[0].position.X - cars[1].position.X, 2) + Math.Pow(cars[0].position.Y - cars[1].position.Y, 2));
+            if (distance < 20)
+            {
+                ForceRes();
+                colX = (cars[0].position.X + cars[1].position.X) / 2;
+                colY = (cars[0].position.Y + cars[1].position.Y) / 2;
+                collision = true;
+            }
+            else
+            {
+                collision = false;
+            }
+        }
+
+        public void ForceRes()
+        {
+            ResForceX = cars[0].ForceX + cars[1].ForceX;
+            ResForceY = cars[0].ForceY + cars[1].ForceY;
+            ResForce = (float) Math.Sqrt(Math.Pow(ResForceX, 2) + Math.Pow(ResForceY, 2));
+            ResForceAngle = (float) Math.Atan2(ResForceY, ResForceX) - 2* (float)Math.PI;
+            ForceResult = new Tuple<float,float>(ResForce, ResForceAngle);
+            stuckFix();
+        }
+
+        public void stuckFix()
+        {
 
         }
 

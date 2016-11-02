@@ -17,14 +17,15 @@ namespace RaceGame2.Lib
         public int health;
         public int maxHealth;
         public int weight = 3;
-        public float fuel = 100000;
+        public int player;
+        public float fuel = 100;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
         public Point position = new Point(500,500);
-        private float positionX, positionY;
-        private Point prevPosition;
+        public float positionX, positionY;
+        private Point prevPosition = new Point(500,500);
         public float rotation;
         public static float rotationRate = (float) Math.PI / 50;
         private float angle;
@@ -45,7 +46,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public Car()
         {
-            this.fuel = 100;
+            this.fuel = 10000;
             this.imageLocation = "default.png";
             position.X = 0;
             position.Y = 0;
@@ -129,8 +130,8 @@ namespace RaceGame2.Lib
         {
             Force = (float) speed * weight;
             ForceAngle = rotation;
-            ForceX = (float) Math.Cos(ForceAngle) * Force;
-            ForceY = (float) Math.Sin(ForceAngle) * Force;
+            ForceX = (float) Math.Cos(ForceAngle);
+            ForceY = (float) Math.Sin(ForceAngle);
         }
 
         private void accelerate()
@@ -252,6 +253,11 @@ namespace RaceGame2.Lib
             {
                 positionY = 13;
             }
+            if (RaceGame.stuck)
+            {
+                positionX = position.X;
+                positionY = position.Y;
+            }
             position.X = (int) Math.Round(positionX);
             position.Y = (int) Math.Round(positionY);
             float angle =
@@ -262,8 +268,16 @@ namespace RaceGame2.Lib
             {
                 this.angle = angle;
             }
-            changeSpeed();
             calcForce();
+            if (RaceGame.collision && counter > 10)
+            {
+                this.rotation = RaceGame.ForceResult.Item2;
+                if (speed >= 0){this.speed = RaceGame.ForceResult.Item1 / weight;}
+                else{this.speed = 3 * (RaceGame.ForceResult.Item1 / weight);}
+                counter = 0;
+            }
+            counter++;
+            changeSpeed();
         }
 
         public float getAngle()
