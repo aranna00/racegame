@@ -13,6 +13,7 @@ namespace RaceGame2
 
         public List<Car> cars;
         public List<Map> maps = new List<Map>();
+        private System.ComponentModel.IContainer components;
         public Map map;
         private int upgradeTimer = 0;
         public List<Upgrade> upgrades = new List<Upgrade>();
@@ -22,9 +23,10 @@ namespace RaceGame2
         public RaceGame(List<Car> cars,Map map)
         {
             this.BackgroundImage = map.getImage();
-            this.init();
+            this.InitializeComponent();
             this.cars = cars;
             this.map = map;
+            this.map.setCarsStartingPoints();
 
             this.SetStyle(
                 ControlStyles.UserPaint |
@@ -120,21 +122,31 @@ namespace RaceGame2
 
 
         #region Windows Form Designer generated code
-        private void init()
+
+        private void InitializeComponent()
         {
-            Size size = new Size(1024, 768);
-            this.Location = new Point(0,0);
-            this.Size = size ;
-            this.MaximumSize = size;
+            this.components = new System.ComponentModel.Container();
+            this.timerGameTicks = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // timerGameTicks
+            // 
+            this.timerGameTicks.Enabled = true;
+            this.timerGameTicks.Interval = 1;
+            this.timerGameTicks.Tick += new System.EventHandler(this.timerGameTicks_Tick);
+            // 
+            // RaceGame
+            // 
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 768);
+            this.MinimizeBox = false;
             this.Name = "RaceGame";
             this.Text = "De echte racegame";
-            timerGameTicks = new Timer();
-            this.timerGameTicks.Interval = 1;
-            this.timerGameTicks.Enabled = true;
-            this.timerGameTicks.Tick += new System.EventHandler(this.timerGameTicks_Tick);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

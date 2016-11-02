@@ -100,7 +100,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RaceGame2.csproj" />
+    <Content Include="RaceGame2.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets/**/*">
@@ -129,7 +129,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Lib\Upgrades\" />
+    <Folder Include="Lib\Maps\"/>
+    <Folder Include="Lib\Upgrades\"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
