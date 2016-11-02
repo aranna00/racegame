@@ -80,6 +80,7 @@ namespace RaceGame2
             {
                 car.calculateNewPosition();
             }
+            map.checkpointChecker();
             Invalidate();
         }
 
@@ -100,7 +101,6 @@ namespace RaceGame2
             // RaceGame
             // 
             this.ClientSize = new System.Drawing.Size(1008, 729);
-            this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1024, 768);

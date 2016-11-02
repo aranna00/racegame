@@ -22,7 +22,6 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(103, 377));
             this.pitstop.Add(new Point(163, 484));
             this.respawn.Add(new Point(132, 433));
-
             this.imageLocation = "dirtmap1.png";
             setImage();
             

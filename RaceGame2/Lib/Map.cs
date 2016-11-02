@@ -94,7 +94,7 @@ namespace RaceGame2.Lib
                         }
                     }
                 }
-                if (car.lapCounter == laps)
+                if (car.lapCounter == laps+1)
                 {
                     Application.Exit();
                 }
