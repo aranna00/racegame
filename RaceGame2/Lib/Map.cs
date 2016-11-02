@@ -33,7 +33,6 @@ namespace RaceGame2.Lib
             imageLocation = ("assets\\maps\\" + this.imageLocation);
             imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            imageBitmap.Save("blargh.png");
             Size imageSize = new Size(1024, 768);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;
@@ -94,7 +93,7 @@ namespace RaceGame2.Lib
                         }
                     }
                 }
-                if (car.lapCounter == laps+1)
+                if (car.lapCounter == laps)
                 {
                     Application.Exit();
                 }

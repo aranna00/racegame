@@ -75,6 +75,7 @@ namespace RaceGame2
             this.selectedMap = (Map)Activator.CreateInstance(test);
             this.selectedMap.laps = comboBox3.SelectedIndex + 1;
             this.selectedMap.cars = cars;
+            this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
             raceForm.map = selectedMap;

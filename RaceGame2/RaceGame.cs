@@ -79,6 +79,19 @@ namespace RaceGame2
             foreach (Car car in cars)
             {
                 car.calculateNewPosition();
+                if (!(car.fuel <= 0) || car.getSpeed() != 0)
+                {
+                    continue;
+                }
+                int middlePitStopX = (map.pitstop[0].X + map.pitstop[1].X) / 2;
+                int middlePitStopY = (map.pitstop[0].Y + map.pitstop[1].Y) / 2;
+                car.setPosistion(new Point(middlePitStopX,middlePitStopY));
+                car.positionX = middlePitStopX;
+                car.positionY = middlePitStopY;
+                car.rotation = 0.5f*(float)Math.PI;
+                car.fuel = car.maxFuel;
+                car.movable = false;
+                car.moveCountDown = 240;
             }
             map.checkpointChecker();
             Invalidate();

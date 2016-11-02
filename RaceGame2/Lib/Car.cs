@@ -23,7 +23,7 @@ namespace RaceGame2.Lib
         public int turningSpeed;
         private bool isAccelerating;
         public Point position;
-        private float positionX, positionY;
+        public float positionX, positionY;
         private Point prevPosition;
         public float rotation;
         public static float rotationRate = (float) Math.PI / 50;
@@ -38,6 +38,8 @@ namespace RaceGame2.Lib
         public float handeling = 0.015f;
         private int counter;
         public float Force,ForceAngle,ForceX,ForceY;
+        public bool movable = true;
+        public int moveCountDown = 0;
 
 
         /// <summary>
@@ -47,9 +49,8 @@ namespace RaceGame2.Lib
         {
             this.fuel = 100;
             this.imageLocation = "default.png";
-            this.rotation = 3.143202f;
+            this.rotation = (float)Math.PI;
             this.speed = 0;
-            this.setPosistion(new Point(466,308));
             positionX = position.X;
             positionY = position.Y;
         }
@@ -69,6 +70,8 @@ namespace RaceGame2.Lib
         public void setPosistion(Point position)
         {
             this.position = position;
+            this.positionX = position.X;
+            this.positionY = position.Y;
         }
 
         public void SetImage(String carColour)
@@ -230,6 +233,15 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
+            if (!this.movable)
+            {
+                if (moveCountDown == 0)
+                {
+                    movable = true;
+                }
+                this.moveCountDown--;
+                return;
+            }
             if (!Map.onTrack(position.X, position.Y))
             {
                 speed = speed * 0.95;
