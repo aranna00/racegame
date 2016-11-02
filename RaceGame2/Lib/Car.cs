@@ -45,6 +45,7 @@ namespace RaceGame2.Lib
         public float shotInterval = 0.5f;
         public bool alive;
         public bool shot;
+        public int player;
 
         /// <summary>
         /// Constructor of the car class
