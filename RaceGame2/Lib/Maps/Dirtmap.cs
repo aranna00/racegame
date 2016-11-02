@@ -9,7 +9,7 @@ namespace RaceGame2.Lib.Maps
 {
     class DirtMap : Map
     {
-        public DirtMap(List<Car> cars) : base()
+        public DirtMap()
         {
             this.cars = cars;
             this.laps = 1;
@@ -29,7 +29,7 @@ namespace RaceGame2.Lib.Maps
             this.upgrades.Add(new Point(664, 520));
             this.upgrades.Add(new Point(854, 687));
             this.upgrades.Add(new Point(925, 185));
-            this.imageLocation = "dirtmap2.png";
+            this.imageLocation = "dirtmap.png";
             setImage();
 
         }

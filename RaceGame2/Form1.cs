@@ -251,7 +251,7 @@ namespace RaceGame2
             string SelectedMap = Convert.ToString(comboBox2.SelectedItem);
 
             String imageLocation = SelectedMap + ".png";
-            imageLocation = ("assets\\" + imageLocation);
+            imageLocation = ("assets\\maps\\" + imageLocation);
             imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
             Size imageSize = new Size(imageBitmap.Width/3, imageBitmap.Height/3);
