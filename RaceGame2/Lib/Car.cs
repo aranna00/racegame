@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace RaceGame2.Lib
 {
@@ -24,13 +25,22 @@ namespace RaceGame2.Lib
         public float rotation;
         public static float rotationRate = (float) Math.PI / 50;
         private float angle;
-        private double speed;
-        private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false;
-        private Keys leftKey, rightKey, throttleKey, brakeKey;
+        public double speed;
+        private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false, triggerPressed = false;
+        private Keys leftKey, rightKey, throttleKey, brakeKey, triggerKey;
         private Image image;
         public int checkpointCounter = 1;
         public int lapCounter = 0;
         public String imageLocation;
+        public float bulletSpeed = 10f;
+        public float shotInterval = 0.5f;
+        public bool alive;
+        public bool shot;
+
+
+
+
+
 
 
 
@@ -51,12 +61,13 @@ namespace RaceGame2.Lib
         /// <param name="rightKey">the key to steer right</param>
         /// <param name="throttleKey">the key to throttle</param>
         /// <param name="brakeKey">the key to brake/reverse</param>
-        public void setControls(Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey)
+        public void setControls(Keys leftKey, Keys rightKey, Keys throttleKey, Keys brakeKey, Keys triggerKey)
         {
             this.leftKey = leftKey;
             this.rightKey = rightKey;
             this.throttleKey = throttleKey;
             this.brakeKey = brakeKey;
+            this.triggerKey = triggerKey;
         }
 
         public void SetImage(String carColour)
@@ -75,6 +86,21 @@ namespace RaceGame2.Lib
             fuel -= fuelCost;
         }
 
+        internal void Shoot()
+        {
+
+            bool shot = false;
+            if (health > 0)
+            {
+                alive = true;
+            }
+                Bullet bullet = new Bullet();
+            bullet.rotation = this.rotation;
+
+
+        }
+
+
         public void handleKeyDownEvent(KeyEventArgs keys)
         {
             if (leftKey == keys.KeyCode)
@@ -85,6 +111,8 @@ namespace RaceGame2.Lib
                 throttlePressed = true;
             if (brakeKey == keys.KeyCode)
                 brakePressed = true;
+            if (triggerKey == keys.KeyCode)
+                triggerPressed = true;
         }
 
         public void handleKeyUpEvent(KeyEventArgs keys)
@@ -98,6 +126,8 @@ namespace RaceGame2.Lib
                 throttlePressed = false;
             if (brakeKey == keys.KeyCode)
                 brakePressed = false;
+            if (triggerKey == keys.KeyCode)
+                triggerPressed = false;
         }
 
         public Point getPosition()
@@ -137,6 +167,8 @@ namespace RaceGame2.Lib
                 coast();
             }
         }
+
+
 
         private void brake()
         {
