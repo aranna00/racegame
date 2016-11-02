@@ -11,17 +11,17 @@ namespace RaceGame2.Lib.Maps
     {
         public DirtMap()
         {
-            this.startingLine.Add(new Point(466,308));
-            this.startingLine.Add(new Point(466, 351));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(343, 302), new Point(423, 374) }));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(2, new List<Point> { new Point(54, 142), new Point(132, 214) }));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(3, new List<Point> { new Point(54, 648), new Point(132, 729) }));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(4, new List<Point> { new Point(426, 485), new Point(517, 569) }));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(5, new List<Point> { new Point(891, 648), new Point(972, 721) }));
-            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(6, new List<Point> { new Point(891, 135), new Point(972, 222) }));
-            this.pitstop.Add(new Point(103, 377));
-            this.pitstop.Add(new Point(163, 484));
-            this.respawn.Add(new Point(132, 433));
+            this.startingLine.Add(new Point(450,285));
+            this.startingLine.Add(new Point(450, 325));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(343, 283), new Point(418, 355) }));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(2, new List<Point> { new Point(69, 134), new Point(146, 202) }));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(3, new List<Point> { new Point(71, 615), new Point(141, 687) }));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(4, new List<Point> { new Point(447, 462), new Point(544, 585) }));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(5, new List<Point> { new Point(862, 617), new Point(935, 684) }));
+            this.checkpoints.Add(new KeyValuePair<int, List<Point>>(6, new List<Point> { new Point(863, 131), new Point(834, 207) }));
+            this.pitstop.Add(new Point(429, 532));
+            this.pitstop.Add(new Point(572, 586));
+            this.respawn.Add(new Point(493, 560));
             this.imageLocation = "dirtmap.png";
             setImage();
             
