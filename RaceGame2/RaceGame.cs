@@ -134,12 +134,6 @@ namespace RaceGame2
             ResForce = (float) Math.Sqrt(Math.Pow(ResForceX, 2) + Math.Pow(ResForceY, 2));
             ResForceAngle = (float) Math.Atan2(ResForceY, ResForceX) - 2* (float)Math.PI;
             ForceResult = new Tuple<float,float>(ResForce, ResForceAngle);
-            stuckFix();
-        }
-
-        public void stuckFix()
-        {
-
         }
 
         #endregion

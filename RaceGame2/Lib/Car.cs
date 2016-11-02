@@ -230,6 +230,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
+            changeSpeed();
             if (!Map.onTrack(position.X, position.Y))
             {
                 speed = speed * 0.95;
@@ -277,7 +278,6 @@ namespace RaceGame2.Lib
                 counter = 0;
             }
             counter++;
-            changeSpeed();
         }
 
         public float getAngle()
