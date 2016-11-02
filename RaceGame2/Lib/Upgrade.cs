@@ -10,10 +10,11 @@ namespace RaceGame2.Lib
 {
     public class Upgrade
     {
-        string imageLocation;
+        public string imageLocation;
         private Image imageBitmap;
         public Image image;
         private Point position;
+        public bool Visible = true;
 
         public Upgrade()
         {

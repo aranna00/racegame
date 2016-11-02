@@ -17,7 +17,7 @@ namespace RaceGame2.Lib
         public int health;
         public int maxHealth;
         public int weight = 3;
-        public float fuel = 100000;
+        public float fuel;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
@@ -37,6 +37,7 @@ namespace RaceGame2.Lib
         public String imageLocation;
         public float handeling = 0.015f;
         private int counter;
+        public int pitstopCounter = 0;
         public float Force,ForceAngle,ForceX,ForceY;
 
 
@@ -45,7 +46,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public Car()
         {
-            this.fuel = 100;
+            this.fuel = maxFuel;
             this.imageLocation = "default.png";
             this.rotation = 3.143202f;
             this.speed = 0;
@@ -84,7 +85,7 @@ namespace RaceGame2.Lib
 
         public void CalcFuel()
         {
-            fuel -= fuelCost;
+            fuel = fuel - fuelCost;
         }
 
         public void handleKeyDownEvent(KeyEventArgs keys)
@@ -157,6 +158,7 @@ namespace RaceGame2.Lib
             {
                 coast();
             }
+            
         }
 
         private void brake()
@@ -282,17 +284,13 @@ namespace RaceGame2.Lib
             return this.rotation;
         }
 
-        private void PitStop()
+        public void PitStop()
         {
             if (speed == 0)
             {
                 if (fuel < maxFuel)
                 {
                     fuel += 1;
-                }
-                if (health < maxHealth)
-                {
-                    health += 1;
                 }
             }
         }

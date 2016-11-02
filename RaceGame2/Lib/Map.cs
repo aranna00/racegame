@@ -22,7 +22,9 @@ namespace RaceGame2.Lib
         public List<Point> pitstop = new List<Point>();
         public List<Car> cars;
         public List<Point> upgrades = new List<Point>();
-        private int upgradeCounter=0;
+        private int upgradeCounter = 0;
+        public bool pitstopbool = false;
+        public int startlineNum;
 
 
         public void setCarsStartingPoints()
@@ -38,49 +40,28 @@ namespace RaceGame2.Lib
             imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
             imageBitmap.Save("blargh.png");
-            Size imageSize = new Size(1024, 768);
+            Size imageSize = new Size(1007, 728);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;
-            mapImage = (Bitmap)image;
+            mapImage = (Bitmap) image;
         }
 
         public void Position()
         {
             cars[0].position = new Point(startingLine[0].X, startingLine[0].Y);
             cars[1].position = new Point(startingLine[1].X, startingLine[1].Y);
-            cars[0].rotation= (float) Math.PI;
+            cars[0].rotation = (float) Math.PI;
             cars[1].rotation = (float) Math.PI;
-
         }
 
         public void upgradeCirculation()
         {
             if (upgradeCounter == 300)
             {
-
                 upgradeCounter = 0;
             }
             upgradeCounter++;
         }
-
-        //        public void checkpointChecker()
-        //        {
-        //            int counter = 0;
-        //            {
-        //                foreach (Car car in cars)
-        //                {
-        //                    Point pos = car.getPosition();
-        //                    if ((pos.X >= checkpoint[0].X && pos.X <= checkpoint[1].X) &&
-        //                        (pos.Y >= checkpoint[0].Y && pos.Y <= checkpoint[1].Y))
-        //                    {
-        //                        if (car.checkpointCounter == 0 && counter == 0)
-        //                        {
-        //                            car.checkpointCounter++;
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
 
         public Image getImage()
         {
@@ -101,9 +82,23 @@ namespace RaceGame2.Lib
                     return true;
                 }
                 return false;
-
             }
             return false;
+        }
+
+        public void upgradeHit(List<Upgrade> upgradesAvailable)
+        {
+            foreach (Car car in cars)
+            {
+                Point pos = car.getPosition();
+                foreach (Upgrade upgrade in upgradesAvailable)
+                {
+                    if (true && upgrade.Visible)
+                    {
+                        upgrade.Visible = false;
+                    }
+                }
+            }
         }
 
         public void checkpointChecker()
@@ -125,11 +120,34 @@ namespace RaceGame2.Lib
                         {
                             car.checkpointCounter = checkpointList.Key;
                         }
+                        if (checkpointList.Key != startlineNum)
+                        {
+                            pitstopbool = false;
+                        }
                     }
                 }
                 if (car.lapCounter == laps)
                 {
                     Application.Exit();
+                }
+            }
+        }
+
+        public void pitstopChecker()
+        {
+            foreach (Car car in cars)
+            {
+                Point pos = car.getPosition();
+
+                if ((pos.X >= pitstop[0].X && pos.X <= pitstop[1].X) &&
+                    (pos.Y >= pitstop[0].Y && pos.Y <= pitstop[1].Y))
+                {
+                    if (pitstopbool == false)
+                    {
+                        pitstopbool = true;
+                        car.pitstopCounter += 1;
+                    }
+                    car.PitStop();
                 }
             }
         }

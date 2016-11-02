@@ -11,7 +11,7 @@ namespace RaceGame2.Lib.Maps
     {
         public DirtMap()
         {
-            this.cars = cars;
+            
             this.laps = 1;
             this.startingLine.Add(new Point(466, 308));
             this.startingLine.Add(new Point(466, 351));
@@ -30,6 +30,7 @@ namespace RaceGame2.Lib.Maps
             this.upgrades.Add(new Point(854, 687));
             this.upgrades.Add(new Point(925, 185));
             this.imageLocation = "dirtmap.png";
+            startlineNum = 4;
             setImage();
 
         }

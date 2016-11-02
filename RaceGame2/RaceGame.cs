@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using RaceGame2.Lib;
+using RaceGame2.Lib.Upgrades;
 
 namespace RaceGame2
 {
@@ -19,6 +20,7 @@ namespace RaceGame2
         public List<Upgrade> upgrades = new List<Upgrade>();
         private int curUpgrade;
         private Point newPosition;
+        public List<Upgrade> upgradesAvailable = new List<Upgrade>() {new slowdown(),new speed(), new fuelupgrade()};
 
         public RaceGame(List<Car> cars,Map map)
         {
@@ -39,15 +41,8 @@ namespace RaceGame2
 
             this.KeyDown += new KeyEventHandler(RaceGame_KeyDown);
             this.KeyUp += new KeyEventHandler(RaceGame_KeyUp);
-            upgradeslist();
         }
 
-        public void upgradeslist()
-        {
-            List<String> upgradeImage = new List<String>();
-            upgradeImage.Add("tool.png");
-            upgradeImage.Add("star.png");
-        }
 
         void RaceGame_KeyUp(object sender, KeyEventArgs e) {
             foreach (Car car in cars)
@@ -87,27 +82,34 @@ namespace RaceGame2
             }
             foreach (Upgrade upgrade in upgrades)
             {
-                var pos = upgrade.getPosition();
-                g.TranslateTransform(pos.X, pos.Y);
-                g.DrawImage(upgrade.GetImage(), x: -(float)upgrade.GetImage().Height / 4, y: -(float)upgrade.GetImage().Width);
+                if (upgrade.Visible)
+                {
+                    var pos = upgrade.getPosition();
+                    g.TranslateTransform(pos.X, pos.Y);
+                    g.DrawImage(upgrade.GetImage(), x: -(float) upgrade.GetImage().Height, y: -(float) upgrade.GetImage().Width);
+                }
             }
         }
-
+         
         public void timerGameTicks_Tick(object sender, EventArgs e) {
             foreach (Car car in cars)
             {
                 car.calculateNewPosition();
             }
+           // spawnUpgrade();
             Invalidate();
+            map.pitstopChecker();
+            map.checkpointChecker();
         }
 
         public void spawnUpgrade()
         {
-            if (upgradeTimer == 300)
+            if (upgradeTimer == 200)
             {
-                upgrades.Add(new Upgrade());
-                curUpgrade = upgrades.Count - 1;
                 Random rnd = new Random();
+                int selectedUpgrade = rnd.Next(0, upgradesAvailable.Count);
+                upgrades.Add(upgradesAvailable[selectedUpgrade]);
+                curUpgrade = upgrades.Count - 1;
                 int randomUpgrade = rnd.Next(0, map.upgrades.Count);
                 newPosition = map.upgrades[randomUpgrade];
                 upgrades[curUpgrade].setPosition(newPosition);
