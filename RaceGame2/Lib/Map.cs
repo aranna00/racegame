@@ -49,27 +49,6 @@ namespace RaceGame2.Lib
 
         }
 
-
-
-        //        public void checkpointChecker()
-        //        {
-        //            int counter = 0;
-        //            {
-        //                foreach (Car car in cars)
-        //                {
-        //                    Point pos = car.getPosition();
-        //                    if ((pos.X >= checkpoint[0].X && pos.X <= checkpoint[1].X) &&
-        //                        (pos.Y >= checkpoint[0].Y && pos.Y <= checkpoint[1].Y))
-        //                    {
-        //                        if (car.checkpointCounter == 0 && counter == 0)
-        //                        {
-        //                            car.checkpointCounter++;
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-
         public Image getImage()
         {
             return this.image;

@@ -62,7 +62,7 @@
     <Compile Include="Lib\Logger.cs" />
     <Compile Include="Lib\Map.cs" />
     <Compile Include="Lib\Maps\DirtMap1.cs" />
-    <Compile Include="Lib\Maps\RoadMap1.cs"/>
+    <Compile Include="Lib\Maps\RoadMap1.cs" />
     <Compile Include="Lib\Player.cs" />
     <Compile Include="Lib\Upgrade.cs" />
     <Compile Include="Program.cs" />
@@ -96,11 +96,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\maps\roadmap1.png"/>
+    <Content Include="assets\maps\roadmap1.png" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RaceGame2.csproj"/>
+    <Content Include="RaceGame2.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets/**/*">
@@ -129,8 +129,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Lib\Maps\"/>
-    <Folder Include="Lib\Upgrades\"/>
+    <Folder Include="Lib\Maps" />
+    <Folder Include="Lib\Maps\" />
+    <Folder Include="Lib\Upgrades\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,8 +30,6 @@ namespace RaceGame2
         public Form1()
         {
             InitializeComponent();
-//            selectedCar1 = Default1;
-//            selectedCar2 = Default2;
             rotationTimer = new System.Windows.Forms.Timer();
             rotationTimer.Tick += new EventHandler(rotationTimer_Tick);
             rotationTimer.Interval = 1;
@@ -77,10 +75,9 @@ namespace RaceGame2
             this.selectedMap = (Map)Activator.CreateInstance(test);
             this.selectedMap.laps = comboBox3.SelectedIndex + 1;
             this.selectedMap.cars = cars;
-            this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
-            raceForm.map = selectedMap;
             raceForm.FormClosing += new FormClosingEventHandler(RaceFormOnClosingEventhandler);
+            raceForm.map = selectedMap;
             raceForm.Show();
             this.Hide();
             raceForm.Focus();

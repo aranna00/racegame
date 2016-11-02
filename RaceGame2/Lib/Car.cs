@@ -22,7 +22,7 @@ namespace RaceGame2.Lib
         public int maxFuel = 100;
         public int turningSpeed;
         private bool isAccelerating;
-        public Point position = new Point(500,500);
+        public Point position;
         private float positionX, positionY;
         private Point prevPosition;
         public float rotation;
@@ -47,10 +47,11 @@ namespace RaceGame2.Lib
         {
             this.fuel = 100;
             this.imageLocation = "default.png";
-            position.X = 0;
-            position.Y = 0;
-            this.rotation = 0;
+            this.rotation = 3.143202f;
             this.speed = 0;
+            this.setPosistion(new Point(466,308));
+            positionX = position.X;
+            positionY = position.Y;
         }
 
         /// <param name="leftKey">the key to steer left</param>
