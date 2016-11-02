@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace RaceGame2.Lib.Maps
 {   
-    class DirtMap1 : Map
+    class DirtMap : Map
     {
-        public DirtMap1()
+        public DirtMap()
         {
             this.startingLine.Add(new Point(466,308));
             this.startingLine.Add(new Point(466, 351));
@@ -22,7 +22,7 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(103, 377));
             this.pitstop.Add(new Point(163, 484));
             this.respawn.Add(new Point(132, 433));
-            this.imageLocation = "dirtmap1.png";
+            this.imageLocation = "dirtmap.png";
             setImage();
             
         }   

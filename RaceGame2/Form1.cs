@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -39,7 +38,6 @@ namespace RaceGame2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine(selectedCar1);
             if (selectedCar1 == null || selectedCar2 == null)
             {
                 MessageBox.Show("Please select a car type", "No car type selected");
@@ -53,6 +51,11 @@ namespace RaceGame2
             if (comboBox2.Text == "Pick map")
             {
                 MessageBox.Show("Please select a map", "No map selected");
+                return;
+            }
+            if (comboBox3.Text == "Pick laps")
+            {
+                MessageBox.Show("Please select an amount of laps to run", "No laps selected");
                 return;
             }
             raceForm?.Close();
@@ -69,11 +72,13 @@ namespace RaceGame2
             player2Car.SetImage(comboBox1.Text);
             player1Car.setControls(Keys.Left,Keys.Right,Keys.Up,Keys.Down,Keys.Space);
             player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S,Keys.RControlKey);
-            cars.Add(player1Car);
-            cars.Add(player2Car);
             var test = assembly.GetTypes().First(t => t.Name == comboBox2.Text);
             this.selectedMap = (Map)Activator.CreateInstance(test);
             this.selectedMap.laps = comboBox3.SelectedIndex + 1;
+            player1Car.setFuelCost(selectedMap.fuelCostModifier);
+            player2Car.setFuelCost(selectedMap.fuelCostModifier);
+            cars.Add(player1Car);
+            cars.Add(player2Car);
             this.selectedMap.cars = cars;
             this.selectedMap.setCarsStartingPoints();
             raceForm = new RaceGame(cars,selectedMap);
@@ -100,14 +105,12 @@ namespace RaceGame2
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
             Default1.BorderStyle = BorderStyle.Fixed3D;
             Muscle1.BorderStyle = BorderStyle.None;
             Drifter1.BorderStyle = BorderStyle.None;
             Pickup1.BorderStyle = BorderStyle.None;
             Racer1.BorderStyle = BorderStyle.None;
             selectedCar1 = Default1;
-
         }
 
         void rotationTimer_Tick(object sender, EventArgs e)
@@ -252,7 +255,7 @@ namespace RaceGame2
             string SelectedMap = Convert.ToString(comboBox2.SelectedItem);
 
             String imageLocation = SelectedMap + ".png";
-            imageLocation = ("assets\\" + imageLocation);
+            imageLocation = ("assets\\maps\\" + imageLocation);
             imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
             Size imageSize = new Size(imageBitmap.Width/3, imageBitmap.Height/3);

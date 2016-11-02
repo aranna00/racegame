@@ -18,7 +18,7 @@ namespace RaceGame2.Lib
         public int health;
         public int maxHealth;
         public int weight = 3;
-        public float fuel = 100000;
+        public float fuel = 100;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
@@ -46,13 +46,6 @@ namespace RaceGame2.Lib
         public bool alive;
         public bool shot;
 
-
-
-
-
-
-
-
         /// <summary>
         /// Constructor of the car class
         /// </summary>
@@ -64,6 +57,11 @@ namespace RaceGame2.Lib
             this.speed = 0;
             positionX = position.X;
             positionY = position.Y;
+        }
+
+        public void setFuelCost(int fuelCostModifier)
+        {
+            this.fuelCost *= fuelCostModifier;
         }
 
         /// <param name="leftKey">the key to steer left</param>

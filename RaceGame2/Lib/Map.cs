@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -8,7 +8,7 @@ namespace RaceGame2.Lib
 {
     public class Map
     {
-        public int fuelCostModifier;
+        public int fuelCostModifier = 1;
         public List<Point> startingLine = new List<Point>();
         private int startX;
         public int laps;
@@ -33,7 +33,7 @@ namespace RaceGame2.Lib
             imageLocation = ("assets\\maps\\" + this.imageLocation);
             imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(1024, 768);
+            Size imageSize = new Size(1007, 728);
             imageBitmap = new Bitmap(imageBitmap, imageSize);
             this.image = imageBitmap;
             mapImage = (Bitmap)image;

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RaceGame2.Lib.Maps
 {
-    class RoadMap1 : Map
+    class RoadMap : Map
     {
-        public RoadMap1()
+        public RoadMap()
         {
             this.startingLine.Add(new Point(213, 730));
             this.startingLine.Add(new Point(239, 710));
@@ -23,7 +23,7 @@ namespace RaceGame2.Lib.Maps
             this.pitstop.Add(new Point(358, 689));
             this.respawn.Add(new Point(886, 200));
 
-            this.imageLocation = "roadmap1.png";
+            this.imageLocation = "roadmap.png";
             setImage();
         }
     }

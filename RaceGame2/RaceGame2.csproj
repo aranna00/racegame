@@ -67,8 +67,8 @@
     <Compile Include="Lib\Cars\Racer.cs" />
     <Compile Include="Lib\Logger.cs" />
     <Compile Include="Lib\Map.cs" />
-    <Compile Include="Lib\Maps\DirtMap1.cs" />
-    <Compile Include="Lib\Maps\RoadMap1.cs" />
+    <Compile Include="Lib\Maps\DirtMap.cs" />
+    <Compile Include="Lib\Maps\RoadMap.cs" />
     <Compile Include="Lib\Player.cs" />
     <Compile Include="Lib\Upgrade.cs" />
     <Compile Include="Program.cs" />
@@ -105,7 +105,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\maps\roadmap1.png" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +137,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="assets" />
+    <Folder Include="assets\maps" />
     <Folder Include="Lib\Maps" />
     <Folder Include="Lib\Maps\" />
     <Folder Include="Lib\Upgrades\" />

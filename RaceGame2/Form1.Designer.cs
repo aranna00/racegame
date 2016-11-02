@@ -375,8 +375,8 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "RoadMap1",
-            "DirtMap1"});
+            "RoadMap",
+            "DirtMap"});
             this.comboBox2.Location = new System.Drawing.Point(464, 368);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(75, 21);
@@ -463,7 +463,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1024, 768);
             this.Name = "Form1";
-            this.Text = "Generic race game title";
+            this.Text = "Need For Sleep";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Default1)).EndInit();
