@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -24,6 +25,12 @@ namespace RaceGame2
         public List<Map> maps = new List<Map>();
         private System.ComponentModel.IContainer components;
         public Map map;
+        public float distance;
+        private float moveX, moveY;
+        public static bool collision, stuck;
+        public float ResForce, ResForceX, ResForceY, ResForceAngle, colX, colY;
+        public static Tuple<float, float> ForceResult;
+
         public RaceGame(List<Car> cars, Map map)
         {
             this.InitializeComponent();
@@ -77,9 +84,12 @@ namespace RaceGame2
             foreach (Car car in cars)
             {
                 var pos = car.getPosition();
-                g.TranslateTransform(pos.X, pos.Y);
+                float moveX = car.getImage().Height / 2f + pos.X;
+                float moveY = car.getImage().Width / 2f + pos.Y;
+                g.TranslateTransform(moveX , moveY );
                 g.RotateTransform(car.getRotation()*(float)(180/Math.PI)+90);
-                g.DrawImage(car.getImage(), x: -(float)car.getImage().Height/4, y: -(float)car.getImage().Width);
+                g.TranslateTransform(-moveX , -moveY );
+                g.DrawImage(car.getImage(), pos.X, pos.Y);
                 g.ResetTransform();
             }
             Pen blackPen = new Pen(Color.WhiteSmoke, 3);
@@ -120,6 +130,7 @@ namespace RaceGame2
         public void timerGameTicks_Tick(object sender, EventArgs e) {
             foreach (Car car in cars)
             {
+                collideCar();
                 car.calculateNewPosition();
                 if (!(car.fuel <= 0) || car.getSpeed() != 0)
                 {
@@ -158,15 +169,15 @@ namespace RaceGame2
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // timerGameTicks
-            // 
+            //
             this.timerGameTicks.Enabled = true;
             this.timerGameTicks.Interval = 1;
             this.timerGameTicks.Tick += new System.EventHandler(this.timerGameTicks_Tick);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(44, 55);
@@ -176,9 +187,9 @@ namespace RaceGame2
             this.label1.Text = "0";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
+            //
             // label5
-            // 
+            //
             this.label5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(89, 19);
@@ -188,9 +199,9 @@ namespace RaceGame2
             this.label5.Text = "Player 1";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label5.Click += new System.EventHandler(this.label5_Click_1);
-            // 
+            //
             // label6
-            // 
+            //
             this.label6.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -200,9 +211,9 @@ namespace RaceGame2
             this.label6.TabIndex = 14;
             this.label6.Text = "1/5";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -213,9 +224,9 @@ namespace RaceGame2
             this.label2.Text = "1/5";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(815, 19);
@@ -224,9 +235,9 @@ namespace RaceGame2
             this.label3.TabIndex = 15;
             this.label3.Text = "Player 2";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(949, 55);
@@ -235,9 +246,9 @@ namespace RaceGame2
             this.label4.TabIndex = 17;
             this.label4.Text = "0";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
+            //
             // RaceGame
-            // 
+            //
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.label4);
@@ -253,7 +264,31 @@ namespace RaceGame2
             this.Name = "RaceGame";
             this.Text = "Need For Sleep";
             this.ResumeLayout(false);
+        }
 
+        public void collideCar()
+        {
+            distance = (float) Math.Sqrt(Math.Pow(cars[0].position.X - cars[1].position.X, 2) + Math.Pow(cars[0].position.Y - cars[1].position.Y, 2));
+            if (distance < 20)
+            {
+                ForceRes();
+                colX = (cars[0].position.X + cars[1].position.X) / 2;
+                colY = (cars[0].position.Y + cars[1].position.Y) / 2;
+                collision = true;
+            }
+            else
+            {
+                collision = false;
+            }
+        }
+
+        public void ForceRes()
+        {
+            ResForceX = cars[0].ForceX + cars[1].ForceX;
+            ResForceY = cars[0].ForceY + cars[1].ForceY;
+            ResForce = (float) Math.Sqrt(Math.Pow(ResForceX, 2) + Math.Pow(ResForceY, 2));
+            ResForceAngle = (float) Math.Atan2(ResForceY, ResForceX) - 2* (float)Math.PI;
+            ForceResult = new Tuple<float,float>(ResForce, ResForceAngle);
         }
 
 

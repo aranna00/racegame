@@ -162,8 +162,8 @@ namespace RaceGame2.Lib
         {
             Force = (float) speed * weight;
             ForceAngle = rotation;
-            ForceX = (float) Math.Cos(ForceAngle) * Force;
-            ForceY = (float) Math.Sin(ForceAngle) * Force;
+            ForceX = (float) Math.Cos(ForceAngle);
+            ForceY = (float) Math.Sin(ForceAngle);
         }
 
         private void accelerate()
@@ -262,6 +262,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public void calculateNewPosition()
         {
+            changeSpeed();
             if (!this.movable)
             {
                 if (moveCountDown == 0)
@@ -294,6 +295,11 @@ namespace RaceGame2.Lib
             {
                 positionY = 13;
             }
+            if (RaceGame.stuck)
+            {
+                positionX = position.X;
+                positionY = position.Y;
+            }
             position.X = (int) Math.Round(positionX);
             position.Y = (int) Math.Round(positionY);
             float angle =
@@ -304,8 +310,15 @@ namespace RaceGame2.Lib
             {
                 this.angle = angle;
             }
-            changeSpeed();
             calcForce();
+            if (RaceGame.collision && counter > 10)
+            {
+                this.rotation = RaceGame.ForceResult.Item2;
+                if (speed >= 0){this.speed = RaceGame.ForceResult.Item1 / weight;}
+                else{this.speed = 3 * (RaceGame.ForceResult.Item1 / weight);}
+                counter = 0;
+            }
+            counter++;
         }
 
         public float getAngle()
