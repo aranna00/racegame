@@ -25,6 +25,7 @@ namespace RaceGame2.Lib
         private int upgradeCounter = 0;
         public bool pitstopbool = false;
         public int startlineNum;
+        public float respawnAngle;
 
 
         public void setCarsStartingPoints()

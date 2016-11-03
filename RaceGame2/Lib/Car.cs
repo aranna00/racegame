@@ -92,7 +92,7 @@ namespace RaceGame2.Lib
             this.imageLocation = ("assets\\cars\\"+this.imageLocation);
             this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
+            Size imageSize = new Size(imageBitmap.Width/5,imageBitmap.Height/5);
             imageBitmap = new Bitmap(imageBitmap,imageSize);
             this.image = imageBitmap;
         }
