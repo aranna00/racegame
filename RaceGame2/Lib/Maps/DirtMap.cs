@@ -11,6 +11,7 @@ namespace RaceGame2.Lib.Maps
     {
         public DirtMap()
         {
+            this.fuelCostModifier = 0.38f;
             this.startingLine.Add(new Point(450,285));
             this.startingLine.Add(new Point(450, 325));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(343, 283), new Point(418, 355) }));

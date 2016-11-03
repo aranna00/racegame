@@ -8,7 +8,7 @@ namespace RaceGame2.Lib
 {
     public class Map
     {
-        public int fuelCostModifier = 1;
+        public float fuelCostModifier = 1;
         public List<Point> startingLine = new List<Point>();
         private int startX;
         public int laps;

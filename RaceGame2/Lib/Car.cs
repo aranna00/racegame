@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Net.Mime;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using RaceGame2.Lib.Cars;
 
 namespace RaceGame2.Lib
 {
@@ -17,7 +18,7 @@ namespace RaceGame2.Lib
         public int grip;
         public int health;
         public int maxHealth;
-        public int weight = 3;
+        public float weight = 3;
         public float fuel = 100;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
@@ -52,15 +53,12 @@ namespace RaceGame2.Lib
         /// </summary>
         public Car()
         {
-            this.fuel = 100;
-            this.imageLocation = "default.png";
-            this.rotation = (float)Math.PI;
-            this.speed = 0;
-            positionX = position.X;
-            positionY = position.Y;
+            
         }
 
-        public void setFuelCost(int fuelCostModifier)
+      
+
+        public void setFuelCost(float fuelCostModifier)
         {
             this.fuelCost *= fuelCostModifier;
         }
@@ -91,7 +89,7 @@ namespace RaceGame2.Lib
             this.imageLocation = ("assets\\cars\\"+this.imageLocation);
             this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
             Image imageBitmap = new Bitmap(imageLocation);
-            Size imageSize = new Size(imageBitmap.Width/4,imageBitmap.Height/4);
+            Size imageSize = new Size(imageBitmap.Width/5,imageBitmap.Height/5);
             imageBitmap = new Bitmap(imageBitmap,imageSize);
             this.image = imageBitmap;
         }
