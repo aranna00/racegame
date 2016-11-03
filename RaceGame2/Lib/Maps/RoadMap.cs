@@ -13,8 +13,6 @@ namespace RaceGame2.Lib.Maps
         {
             this.fuelCostModifier = 0.45f;
             this.startingLine.Add(new Point(235, 665));
-            this.startingLine.Add(new Point(210, 690));
-            this.startingLine.Add(new Point(235, 665));
             this.startingLine.Add(new Point(218, 690));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(1, new List<Point> { new Point(109, 586), new Point(179, 713) }));
             this.checkpoints.Add(new KeyValuePair<int, List<Point>>(2, new List<Point> { new Point(32, 77), new Point(108, 152) }));
