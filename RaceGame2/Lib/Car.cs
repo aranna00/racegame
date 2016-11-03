@@ -18,7 +18,7 @@ namespace RaceGame2.Lib
         public int health;
         public int maxHealth;
         public int weight = 3;
-        public float fuel = 100;
+        public float fuel;
         public float fuelCost = 0.1f;
         public int maxFuel = 100;
         public int turningSpeed;
@@ -38,6 +38,7 @@ namespace RaceGame2.Lib
         public String imageLocation;
         public float handeling = 0.015f;
         private int counter;
+        public int pitstopCounter = 0;
         public float Force,ForceAngle,ForceX,ForceY;
         public bool movable = true;
         public int moveCountDown = 0;
@@ -52,7 +53,7 @@ namespace RaceGame2.Lib
         /// </summary>
         public Car()
         {
-            this.fuel = 100;
+            this.fuel = maxFuel;
             this.imageLocation = "default.png";
             this.rotation = (float)Math.PI;
             this.speed = 0;
@@ -60,7 +61,7 @@ namespace RaceGame2.Lib
             positionY = position.Y;
         }
 
-        public void setFuelCost(int fuelCostModifier)
+        public void setFuelCost(float fuelCostModifier)
         {
             this.fuelCost *= fuelCostModifier;
         }
@@ -337,17 +338,13 @@ namespace RaceGame2.Lib
             return this.rotation;
         }
 
-        private void PitStop()
+        public void PitStop()
         {
             if (speed == 0)
             {
                 if (fuel < maxFuel)
                 {
                     fuel += 1;
-                }
-                if (health < maxHealth)
-                {
-                    health += 1;
                 }
             }
         }
