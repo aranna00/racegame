@@ -166,7 +166,7 @@ namespace RaceGame2
                 car.setPosistion(new Point(middlePitStopX,middlePitStopY));
                 car.positionX = middlePitStopX;
                 car.positionY = middlePitStopY;
-                car.rotation = 0.5f*(float)Math.PI;
+                car.rotation = map.respawnAngle;
                 car.fuel = car.maxFuel;
                 car.movable = false;
                 car.moveCountDown = 240;
@@ -187,6 +187,7 @@ namespace RaceGame2
             Invalidate();
             map.pitstopChecker();
             map.checkpointChecker();
+            Debug.WriteLine(cars[0].checkpointCounter);
         }
 
         public void endScreenFormClosingEventHandler(object sender, FormClosingEventArgs e)
