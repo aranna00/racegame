@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.IO.Ports;
-using System.Net.Mime;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using RaceGame2.Lib.Cars;
 
 namespace RaceGame2.Lib
 {

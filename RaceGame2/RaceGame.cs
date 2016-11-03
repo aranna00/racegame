@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using RaceGame2.Lib;
-using RaceGame2.Lib.Cars;
 using RaceGame2.Lib.Upgrades;
 
 namespace RaceGame2

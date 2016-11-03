@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Net.Mime;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using RaceGame2.Lib;
 
 namespace RaceGame2
