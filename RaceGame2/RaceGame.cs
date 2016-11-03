@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
 using RaceGame2.Lib;
 using RaceGame2.Lib.Cars;
+using RaceGame2.Lib.Upgrades;
 
 namespace RaceGame2
 {
@@ -30,8 +31,13 @@ namespace RaceGame2
         public static bool collision, stuck;
         public float ResForce, ResForceX, ResForceY, ResForceAngle, colX, colY;
         public static Tuple<float, float> ForceResult;
+        private int upgradeTimer = 0;
+        public List<Upgrade> upgrades = new List<Upgrade>();
+        private int curUpgrade;
+        private Point newPosition;
+        public List<Upgrade> upgradesAvailable = new List<Upgrade>() {new slowdown(),new speed(), new fuelupgrade()};
 
-        public RaceGame(List<Car> cars, Map map)
+        public RaceGame(List<Car> cars,Map map)
         {
             this.InitializeComponent();
             this.BackgroundImage = map.getImage();
@@ -93,6 +99,16 @@ namespace RaceGame2
                 g.ResetTransform();
             }
             Pen blackPen = new Pen(Color.WhiteSmoke, 3);
+#if DEBUG
+            foreach (KeyValuePair<int,List<Point>> checkpoint in map.checkpoints)
+            {
+                foreach (var point in checkpoint.Value)
+                {
+                    Rectangle rectangle = new Rectangle(point.X,point.Y,5,5);
+                    g.DrawRectangle(blackPen,rectangle);
+                }
+            }
+#endif
             Brush blackBrush = new SolidBrush(Color.Goldenrod);
             //Brush whiteBrush = new SolidBrush(Color.WhiteSmoke);
             Brush EmptyBrush = new SolidBrush(Color.Gray);
@@ -125,6 +141,15 @@ namespace RaceGame2
             g.TranslateTransform(-51, -50);
             g.DrawImage(Speedmeter_Indic1, 47, 20);
             g.ResetTransform();
+            foreach (Upgrade upgrade in upgrades)
+            {
+                if (upgrade.Visible)
+                {
+                    var pos = upgrade.getPosition();
+                    g.TranslateTransform(pos.X, pos.Y);
+                    g.DrawImage(upgrade.GetImage(), x: -(float) upgrade.GetImage().Height, y: -(float) upgrade.GetImage().Width);
+                }
+            }
         }
 
         public void timerGameTicks_Tick(object sender, EventArgs e) {
@@ -148,9 +173,47 @@ namespace RaceGame2
             }
             label6.Text = cars[0].lapCounter + "/" + map.laps;
             label2.Text = cars[1].lapCounter + "/" + map.laps;
-            map.checkpointChecker();
+            Car winningCar = map.checkpointChecker();
+            if (winningCar != null)
+            {
+                Form endScreen = new EndScreen(winningCar);
+                endScreen.BackgroundImage = map.getImage();
+                endScreen.FormClosing += new FormClosingEventHandler(endScreenFormClosingEventHandler);
+                timerGameTicks.Enabled = false;
+                this.Hide();
+                endScreen.Show();
+            }
+           // spawnUpgrade();
             Invalidate();
+            map.pitstopChecker();
+            map.checkpointChecker();
         }
+
+        public void endScreenFormClosingEventHandler(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
+        }
+
+        public void spawnUpgrade()
+        {
+            if (upgradeTimer == 200)
+            {
+                Random rnd = new Random();
+                int selectedUpgrade = rnd.Next(0, upgradesAvailable.Count);
+                upgrades.Add(upgradesAvailable[selectedUpgrade]);
+                curUpgrade = upgrades.Count - 1;
+                int randomUpgrade = rnd.Next(0, map.upgrades.Count);
+                newPosition = map.upgrades[randomUpgrade];
+                upgrades[curUpgrade].setPosition(newPosition);
+                upgradeTimer = 0;
+            }
+            else
+            {
+                upgradeTimer++;
+            }
+        }
+
+
 
         #region Windows Form Designer generated code
 
@@ -169,9 +232,9 @@ namespace RaceGame2
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            //
+            // 
             // timerGameTicks
-            //
+            // 
             this.timerGameTicks.Enabled = true;
             this.timerGameTicks.Interval = 1;
             this.timerGameTicks.Tick += new System.EventHandler(this.timerGameTicks_Tick);
