@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Net.Mime;
+using System.Windows.Forms;
 using RaceGame2.Lib;
 
 namespace RaceGame2
@@ -13,7 +15,7 @@ namespace RaceGame2
         {
             InitializeComponent();
             this.winner = winner;
-            Winner.Text = "Player " + winner.player + "wins!!";
+            Winner.Text = "Player " + winner.player + " wins!!";
         }
 
         private void InitializeComponent()
@@ -24,17 +26,18 @@ namespace RaceGame2
             // 
             // Winner
             // 
+            this.Winner.BackColor = System.Drawing.Color.Transparent;
             this.Winner.Font = new System.Drawing.Font("Microsoft Sans Serif", 90F);
             this.Winner.Location = new System.Drawing.Point(12, 9);
             this.Winner.Name = "Winner";
-            this.Winner.Size = new System.Drawing.Size(984, 711);
+            this.Winner.Size = new System.Drawing.Size(984, 205);
             this.Winner.TabIndex = 0;
             this.Winner.Text = "Player 0 Wins!!";
             this.Winner.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(385, 568);
+            this.button1.Location = new System.Drawing.Point(379, 623);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(215, 65);
             this.button1.TabIndex = 1;
@@ -66,7 +69,7 @@ namespace RaceGame2
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

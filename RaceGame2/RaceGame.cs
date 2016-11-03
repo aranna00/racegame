@@ -99,6 +99,16 @@ namespace RaceGame2
                 g.ResetTransform();
             }
             Pen blackPen = new Pen(Color.WhiteSmoke, 3);
+#if DEBUG
+            foreach (KeyValuePair<int,List<Point>> checkpoint in map.checkpoints)
+            {
+                foreach (var point in checkpoint.Value)
+                {
+                    Rectangle rectangle = new Rectangle(point.X,point.Y,5,5);
+                    g.DrawRectangle(blackPen,rectangle);
+                }
+            }
+#endif
             Brush blackBrush = new SolidBrush(Color.Goldenrod);
             //Brush whiteBrush = new SolidBrush(Color.WhiteSmoke);
             Brush EmptyBrush = new SolidBrush(Color.Gray);
@@ -169,6 +179,9 @@ namespace RaceGame2
                 Form endScreen = new EndScreen(winningCar);
                 endScreen.BackgroundImage = map.getImage();
                 endScreen.FormClosing += new FormClosingEventHandler(endScreenFormClosingEventHandler);
+                timerGameTicks.Enabled = false;
+                this.Hide();
+                endScreen.Show();
             }
            // spawnUpgrade();
             Invalidate();

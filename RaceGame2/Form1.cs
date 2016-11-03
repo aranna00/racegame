@@ -61,7 +61,7 @@ namespace RaceGame2
             raceForm?.Close();
             if (cars.Count != 0)
             {
-                cars.RemoveRange(0,2);
+                cars = new List<Car>();
             }
             var assembly = Assembly.GetExecutingAssembly();
             var player1Type = assembly.GetTypes().First(t => t.Name == selectedCar1.Name.Remove(selectedCar1.Name.Length-1));
