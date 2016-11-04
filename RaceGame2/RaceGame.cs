@@ -170,6 +170,8 @@ namespace RaceGame2
             }
             label6.Text = cars[0].lapCounter + "/" + map.laps;
             label2.Text = cars[1].lapCounter + "/" + map.laps;
+            label1.Text = cars[0].pitstopCounter.ToString();
+            label4.Text = cars[1].pitstopCounter.ToString();
             Car winningCar = map.checkpointChecker();
             if (winningCar != null)
             {

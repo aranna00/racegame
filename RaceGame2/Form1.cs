@@ -63,8 +63,8 @@ namespace RaceGame2
             Car player2Car = (Car)Activator.CreateInstance(player2Type);
             player1Car.SetImage(comboBox4.Text);
             player2Car.SetImage(comboBox1.Text);
-            player1Car.setControls(Keys.Left,Keys.Right,Keys.Up,Keys.Down,Keys.RControlKey);
-            player2Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S,Keys.Space);
+            player2Car.setControls(Keys.Left,Keys.Right,Keys.Up,Keys.Down,Keys.RControlKey);
+            player1Car.setControls(Keys.A,Keys.D,Keys.W,Keys.S,Keys.Space);
             cars.Add(player1Car);
             cars.Add(player2Car);
             cars[0].player = 1;
