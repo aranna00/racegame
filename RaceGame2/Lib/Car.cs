@@ -26,7 +26,11 @@ namespace RaceGame2.Lib
         public static float rotationRate = (float) Math.PI / 50;
         private float angle;
         public double speed;
-        private bool leftPressed = false, rightPressed = false, throttlePressed = false, brakePressed = false, triggerPressed = false;
+        public bool leftPressed = false;
+        public bool rightPressed = false;
+        public bool throttlePressed = false;
+        public bool brakePressed = false;
+        private bool triggerPressed = false;
         private Keys leftKey, rightKey, throttleKey, brakeKey, triggerKey;
         private Image image;
         public int checkpointCounter = 1;
@@ -43,6 +47,7 @@ namespace RaceGame2.Lib
         public bool alive;
         public bool shot;
         public int player;
+        public bool TestMode = false;
 
         /// <summary>
         /// Constructor of the car class
@@ -85,8 +90,15 @@ namespace RaceGame2.Lib
         public void SetImage(String carColour)
         {
             this.imageLocation = (carColour+"\\"+this.imageLocation);
-            this.imageLocation = ("assets\\cars\\"+this.imageLocation);
-            this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            if (TestMode)
+            {
+                this.imageLocation = ("R:\\RiderProjects\\racegame\\RaceGame2\\assets\\cars\\" + this.imageLocation);
+            }
+            else
+            {
+                this.imageLocation = ("assets\\cars\\" + this.imageLocation);
+                this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            }
             Image imageBitmap = new Bitmap(imageLocation);
             Size imageSize = new Size(imageBitmap.Width/5,imageBitmap.Height/5);
             imageBitmap = new Bitmap(imageBitmap,imageSize);
@@ -270,7 +282,7 @@ namespace RaceGame2.Lib
                 this.moveCountDown--;
                 return;
             }
-            if (!Map.onTrack(position.X, position.Y))
+            if (!Map.onTrack(position.X, position.Y) && !TestMode)
             {
                 speed = speed * 0.95;
             }

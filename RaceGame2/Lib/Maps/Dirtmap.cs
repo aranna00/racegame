@@ -23,8 +23,6 @@ namespace RaceGame2.Lib.Maps
             this.imageLocation = "dirtmap.png";
             startlineNum = 4;
             respawnAngle = 0;
-            setImage();
-
         }
 
     }

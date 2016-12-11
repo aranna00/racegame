@@ -26,6 +26,7 @@ namespace RaceGame2.Lib
         public int startlineNum;
         public float respawnAngle;
         private bool hasWon;
+        public bool TestMode = false;
 
 
         public void setCarsStartingPoints()
@@ -37,8 +38,15 @@ namespace RaceGame2.Lib
 
         public void setImage()
         {
-            imageLocation = ("assets\\maps\\" + this.imageLocation);
-            imageLocation = Path.Combine(System.Environment.CurrentDirectory, imageLocation);
+            if (TestMode)
+            {
+                this.imageLocation = ("R:\\RiderProjects\\racegame\\RaceGame2\\assets\\maps\\" + this.imageLocation);
+            }
+            else
+            {
+                imageLocation = ("assets\\maps\\" + this.imageLocation);
+                this.imageLocation = Path.Combine(Environment.CurrentDirectory, imageLocation);
+            }
             Image imageBitmap = new Bitmap(imageLocation);
             Size imageSize = new Size(1007, 728);
             imageBitmap = new Bitmap(imageBitmap, imageSize);

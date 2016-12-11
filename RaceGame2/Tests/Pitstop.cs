@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using RaceGame2.Lib;
 using RaceGame2.Lib.Cars;
 using RaceGame2.Lib.Maps;
@@ -23,6 +20,7 @@ namespace RaceGame2.Tests
         {
             car = new Pickup();
             map = new DirtMap();
+            car.TestMode = true;
             car.SetImage("Green");
             car.setControls(Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.RControlKey);
             car.player = 1;

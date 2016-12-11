@@ -71,6 +71,7 @@ namespace RaceGame2
             cars[1].player = 2;
             var test = assembly.GetTypes().First(t => t.Name == comboBox2.Text);
             this.selectedMap = (Map)Activator.CreateInstance(test);
+            this.selectedMap.setImage();
             this.selectedMap.laps = comboBox3.SelectedIndex + 1;
             player1Car.setFuelCost(selectedMap.fuelCostModifier);
             player2Car.setFuelCost(selectedMap.fuelCostModifier);
